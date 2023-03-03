@@ -1,34 +1,85 @@
-<!-- 
-<div class="container">
-    <p>Id  {{game.id}}</p>
-    <p>Name of the game: {{ game.name_of_the_game }}</p>
-    <p>Genre: {{ game.genre }}</p>
-
-
-</div> -->
-
-<div class="container-fluid p-0 mt-5 position-relative overflow-hidden">
-    <div class="row">
-        <div class="col-12">
-            <div class="embed-responsive">
-                <img
-                    class="img-fluid embed-responsive-item"
-                    src="http://localhost:3000/{{ game.cover }}"
-                />
-                <label class="position-absolute bottom-0 end-0 mb-3 me-3">
-                    <i
-                        style="cursor: pointer; font-size: 70px"
-                        class="bi bi-plus text-info"
-                    ></i>
-
-                    <!-- Ikona za mijenjanje slika -->
-                    <input
-                        type="file"
-                        style="display: none; visibility: none"
-                        (change)="uploadCoverForGame($event)"
+<!-- <div>
+    <div class="container-fluid p-0 mt-5 position-relative overflow-hidden">
+        <div class="row">
+            <div class="col-12">
+                <div class="embed-responsive">
+                    <img
+                        class="coverr img-fluid embed-responsive-item"
+                        src="http://localhost:3000/{{ game.cover }}"
                     />
-                </label>
+                    <label class="position-absolute bottom-0 end-0 mb-3 me-3">
+                        <i
+                            style="cursor: pointer; font-size: 50px"
+                            class="bi bi-camera text-info"
+                        ></i>
+
+                        <input
+                            type="file"
+                            style="display: none; visibility: none"
+                            (change)="uploadCoverForGame($event)"
+                        />
+                    </label>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="imagee">
+        <img
+            style="height: 200px; width: 150px; border-radius: 10px"
+            src="http://localhost:3000/{{ game.image }}"
+        />
+        <label class="position-absolute mb-0 me-0">
+            <i
+                style="cursor: pointer; font-size: 25px"
+                class="bi bi-camera-fill text-danger"
+            ></i>
+
+            <input
+                type="file"
+                style="display: none; visibility: none"
+                (change)="uploadImageForGame($event)"
+            />
+        </label>
+    </div>
+</div>
+<div style="background-color: gray; height: 1000px"></div> -->
+<div class="containerr">
+    <div
+        class="background"
+        style="background-image: url('http://localhost:3000/{{ game.cover }} ')"
+    >
+        <label class="position-absolute bottom-0 end-0 mb-3 me-3">
+            <i
+                style="cursor: pointer; font-size: 50px"
+                class="bi bi-camera text-info"
+            ></i>
+
+            <input
+                type="file"
+                style="display: none; visibility: none"
+                (change)="uploadCoverForGame($event)"
+            />
+        </label>
+    </div>
+    <div class="imagee">
+        <img
+            style="height: 200px; width: 150px; border-radius: 10px"
+            src="http://localhost:3000/{{ game.image }}"
+        />
+        <label class="iconPos">
+            <i
+                style="cursor: pointer; font-size: 25px"
+                class="bi bi-camera-fill text-danger"
+            ></i>
+
+            <input
+                type="file"
+                style="display: none; visibility: none"
+                (change)="uploadImageForGame($event)"
+            />
+        </label>
+    </div>
+    <div class="text">
+        <h1>{{ game.name_of_the_game }}</h1>
     </div>
 </div>

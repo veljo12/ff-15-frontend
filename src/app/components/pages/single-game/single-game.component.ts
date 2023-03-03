@@ -53,4 +53,22 @@ export class SingleGameComponent implements OnInit {
             }
         });
     }
+
+    uploadImageForGame(ev: any) {
+        console.log(`OVO JE ev ${ev}`);
+        this.fileData = ev.target.files[0];
+        let formData = new FormData();
+        formData.append('img', this.fileData);
+        this.gameService.uploadImage(formData).subscribe((response: any) => {
+            console.log(`ovo je response ${response}`);
+            if (response.status === 0) {
+                this.gameService
+                    .addImageForGame(this.game.id, response.fileName)
+                    .subscribe((addImageResponse) => {
+                        this.toastrService.success('Image uploaded!');
+                        this.ngOnInit();
+                    });
+            }
+        });
+    }
 }

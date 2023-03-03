@@ -1,5 +1,52 @@
-// p{
-//     color: black;
-//     padding: 100px;
-//     background-color: aqua;
+// .containerr {
+//     position: relative;
 // }
+
+// .imagee {
+//     height: 200px;
+//     width: 150px;
+
+//     position: absolute;
+//     top: 40%;
+//     left: 15%;
+// }
+.containerr {
+    height: 1000px;
+    background-color: #0f0e0e;
+    position: relative;
+    overflow: hidden;
+}
+
+.background {
+    height: 500px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.imagee {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+}
+.imagee:hover {
+    transform: scale(1.08);
+    transition: all 0.5s;
+}
+.iconPos {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.text {
+    color: whitesmoke;
+    position: absolute;
+    top: 45%;
+    left: 25%;
+}
