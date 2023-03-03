@@ -12,16 +12,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ContactComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    GeneralModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({positionClass: 'toast-top-center'}),
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, HomeComponent, ContactComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        GeneralModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({ positionClass: 'toast-top-center' }),
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

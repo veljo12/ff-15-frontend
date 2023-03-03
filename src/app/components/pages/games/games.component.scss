@@ -1,41 +1,30 @@
-.tabela{
-    
-   
-    background-color: #0F0E0E;
+.tabela {
+    background-color: #0f0e0e;
     padding-top: 150px;
     padding-bottom: 200px;
-    
 }
-h1{
-    
+h1 {
     padding-top: 50px;
 
     color: whitesmoke;
 }
 
-h4{
+h4 {
     color: whitesmoke;
     -webkit-text-stroke: 0.4px #df4759;
-    
 }
 
-.card{
-    border-color: #20262E;
-    
+.card {
+    border-color: #20262e;
+
     border-style: hidden;
     cursor: pointer;
-   
-   
 }
-.card:hover{
+.card:hover {
     transform: scale(1.08);
     transition: all 0.5s;
 }
 
 .borderColor:hover {
     border-color: turquoise;
- }
- 
-
-
-
+}

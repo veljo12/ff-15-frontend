@@ -1,40 +1,57 @@
 <div style="background-color: #0f0e0e">
-  <div class="container tabela">
-    <h1>Games</h1>
+    <div class="container tabela">
+        <h1>Games</h1>
 
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        placeholder="Search for game..."
-        class="form-control search-input borderColor"
-        style="background-color: #0f0e0e; color: whitesmoke;  margin-bottom: 20px; margin-top: 20px"
-      />
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div *ngFor="let g of games" class="col">
-        <div class="card" routerLink="/single-game/{{ g.id }}">
-          <img src="http://localhost:3000/{{g.image}}" />
-          <div class="card-img-overlay d-flex align-items-end">
-            <h4 class="mx-auto">{{ g.name_of_the_game }}</h4>
-          </div>
+        <div class="input-group mb-3">
+            <input
+                type="text"
+                placeholder="Search for game..."
+                class="form-control search-input borderColor"
+                style="
+                    background-color: #0f0e0e;
+                    color: whitesmoke;
+                    margin-bottom: 20px;
+                    margin-top: 20px;
+                "
+            />
         </div>
-        <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-info mx-2 mt-3 mb-2" routerLink="/admin/edit-game/{{g.id}}">Edit</button>
-          <button type="button" class="btn btn-danger mx-2 mt-3 mb-2" (click)="deleteGame(g.id)">Delete</button>
-        </div>
-      </div>
-    </div>
 
-    <div class="d-flex align-items-end">
-      <button
-        style="margin-top: 70px"
-        type="button"
-        class="btn btn-warning btn-lg mx-auto"
-        routerLink="/admin/add-game"
-      >
-        Add New Game
-      </button>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div *ngFor="let g of games" class="col">
+                <div class="card" routerLink="/single-game/{{ g.id }}">
+                    <img src="http://localhost:3000/{{ g.image }}" />
+                    <div class="card-img-overlay d-flex align-items-end">
+                        <h4 class="mx-auto">{{ g.name_of_the_game }}</h4>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button
+                        type="button"
+                        class="btn btn-info mx-2 mt-3 mb-2"
+                        routerLink="/admin/edit-game/{{ g.id }}"
+                    >
+                        Edit
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger mx-2 mt-3 mb-2"
+                        (click)="deleteGame(g.id)"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-end">
+            <button
+                style="margin-top: 70px"
+                type="button"
+                class="btn btn-warning btn-lg mx-auto"
+                routerLink="/admin/add-game"
+            >
+                Add New Game
+            </button>
+        </div>
     </div>
-  </div>
 </div>

@@ -1,38 +1,72 @@
 <div class="container cont-marg">
-  <form>
-    <div class="row red">
-      <div class="col">
-       
-        <div class="form-group">
-          <label>Name Of The Game:</label>
-          <input type="string" class="form-control" [(ngModel)]="game.name_of_the_game" name="gameName"/>
-        </div>
+    <form>
+        <div class="row red">
+            <div class="col">
+                <div class="form-group">
+                    <label>Name Of The Game:</label>
+                    <input
+                        type="string"
+                        class="form-control"
+                        [(ngModel)]="game.name_of_the_game"
+                        name="gameName"
+                    />
+                </div>
 
-        <div class="add-image">
-          <input *ngIf="edit" type="file" (change)="setUploadedImage($event)">
-          <button *ngIf="edit" class="btn btn-primary" (click)="uploadImage()">Upload image</button>
-        </div>
+                <div class="add-image">
+                    <input
+                        *ngIf="edit"
+                        type="file"
+                        (change)="setUploadedImage($event)"
+                    />
+                    <button
+                        *ngIf="edit"
+                        class="btn btn-primary"
+                        (click)="uploadImage()"
+                    >
+                        Upload image
+                    </button>
+                </div>
 
-        <div class="form-group">
-          <button *ngIf="!edit" (click)="saveGame()" style="margin-top: 20px;" class="btn btn-primary">Add game</button>
-          <button *ngIf="edit" (click)="saveGame()" style="margin-top: 20px;" class="btn btn-info ">Edit game</button>
+                <div class="form-group">
+                    <button
+                        *ngIf="!edit"
+                        (click)="saveGame()"
+                        style="margin-top: 20px"
+                        class="btn btn-primary"
+                    >
+                        Add game
+                    </button>
+                    <button
+                        *ngIf="edit"
+                        (click)="saveGame()"
+                        style="margin-top: 20px"
+                        class="btn btn-info"
+                    >
+                        Edit game
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label>Genre:</label>
+                    <select
+                        [(ngModel)]="game.genre"
+                        class="form-control"
+                        name="gameGenre"
+                    >
+                        <option value="MOBA">MOBA</option>
+                        <option value="Tactical first-person shooter">
+                            Tactical first-person shooter
+                        </option>
+                        <option value="Round-based strategy">
+                            Round-based strategy
+                        </option>
+                        <option value="Tactical first-person shooter">
+                            Tactical first-person shooter
+                        </option>
+                    </select>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label>Genre:</label>
-          <select [(ngModel)]="game.genre" class="form-control" name="gameGenre">
-            <option value="MOBA">MOBA</option>
-            <option value="Tactical first-person shooter">
-              Tactical first-person shooter
-            </option>
-            <option value="Round-based strategy">Round-based strategy</option>
-            <option value="Tactical first-person shooter">
-              Tactical first-person shooter
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </form>
+    </form>
 </div>

@@ -1,10 +1,37 @@
-
+<!-- 
 <div class="container">
     <p>Id  {{game.id}}</p>
     <p>Name of the game: {{ game.name_of_the_game }}</p>
     <p>Genre: {{ game.genre }}</p>
 
 
+</div> -->
+
+<div class="container-fluid p-0 mt-5 position-relative overflow-hidden">
+    <div class="row">
+        <div class="col-12">
+            <div class="embed-responsive">
+                <img
+                    class="img-fluid embed-responsive-item"
+                    src="./../../../../assets/images/lolcover.jpeg"
+                />
+                <label class="position-absolute bottom-0 end-0 mb-3 me-3">
+                    <i
+                        style="cursor: pointer; font-size: 70px"
+                        class="bi bi-plus text-info"
+                    ></i>
+
+                    <i
+                        style="cursor: pointer; font-size: 70px"
+                        class="bi bi-image text-info"
+                    ></i
+                    ><!-- Ikona za mijenjanje slika -->
+                    <input
+                        type="file"
+                        style="display: none; visibility: none"
+                    />
+                </label>
+            </div>
+        </div>
+    </div>
 </div>
-
-

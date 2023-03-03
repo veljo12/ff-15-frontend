@@ -3,21 +3,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GamesSliderComponent } from './games-slider.component';
 
 describe('GamesSliderComponent', () => {
-  let component: GamesSliderComponent;
-  let fixture: ComponentFixture<GamesSliderComponent>;
+    let component: GamesSliderComponent;
+    let fixture: ComponentFixture<GamesSliderComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GamesSliderComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [GamesSliderComponent],
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(GamesSliderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(GamesSliderComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
