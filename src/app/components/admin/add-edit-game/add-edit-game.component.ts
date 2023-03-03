@@ -11,7 +11,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddEditGameComponent implements OnInit {
   game: Games = new Games();
+
   edit: boolean = false;
+  fileData: any;
 
   constructor(
     private gameService: GamesService,
@@ -36,17 +38,38 @@ export class AddEditGameComponent implements OnInit {
     if (this.edit) {
       this.gameService.updateGame(this.game, this.game.id).subscribe((data) => {
         if (data.success) {
-          this.toastrService.success('Game updated!')
+          this.toastrService.success('Game updated!');
           this.router.navigateByUrl('/games');
         }
       });
     } else {
       this.gameService.insertGame(this.game).subscribe((data) => {
         if (data.success) {
-          this.toastrService.success('Game inserted!')
+          this.toastrService.success('Game inserted!');
           this.router.navigateByUrl('/games');
         }
       });
     }
+  }
+
+  setUploadedImage(ev: any) {
+    console.log(ev);
+    this.fileData = ev.target.files[0];
+  }
+
+  uploadImage() {
+    let formData = new FormData();
+    formData.append('img', this.fileData);
+    this.gameService.uploadImage(formData).subscribe((response: any) => {
+      // console.log(response);
+      if (response.status === 0) {
+        this.gameService
+          .addImageForGame(this.game.id, response.fileName)
+          .subscribe((addImageResponse) => {
+            this.toastrService.success('Image uploaded!');
+            this.ngOnInit();
+          });
+      }
+    });
   }
 }

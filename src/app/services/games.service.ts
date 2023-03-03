@@ -38,4 +38,13 @@ export class GamesService {
   getImagesForGame = (id: number) =>{
     return this.httpClient.get<any>(`${this.apiUrl}/images/${id}`)
   }
+
+  uploadImage(formData: any){
+    return this.httpClient.post('http://localhost:3000/upload', formData)
+  }
+
+  addImageForGame(id: number, image: string){
+    return this.httpClient.post(`${this.apiUrl}/add-image`, {id, image});
+  }
+
 }
