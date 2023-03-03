@@ -47,6 +47,6 @@ export class GamesService {
     }
 
     addCoverForGame(id: number, cover: string) {
-        return this.httpClient.post(`${this.apiUrl}/add-image`, { id, cover });
+        return this.httpClient.post(`${this.apiUrl}/add-cover`, { id, cover });
     }
 }

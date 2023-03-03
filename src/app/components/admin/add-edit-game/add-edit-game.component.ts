@@ -55,7 +55,7 @@ export class AddEditGameComponent implements OnInit {
     }
 
     setUploadedImage(ev: any) {
-        console.log(ev);
+        console.log(`OVO JE ev ${ev}`);
         this.fileData = ev.target.files[0];
     }
 
@@ -63,7 +63,7 @@ export class AddEditGameComponent implements OnInit {
         let formData = new FormData();
         formData.append('img', this.fileData);
         this.gameService.uploadImage(formData).subscribe((response: any) => {
-            // console.log(response);
+            console.log(`ovo je response ${response}`);
             if (response.status === 0) {
                 this.gameService
                     .addImageForGame(this.game.id, response.fileName)

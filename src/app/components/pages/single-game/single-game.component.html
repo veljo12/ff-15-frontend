@@ -13,7 +13,7 @@
             <div class="embed-responsive">
                 <img
                     class="img-fluid embed-responsive-item"
-                    src="./../../../../assets/images/lolcover.jpeg"
+                    src="http://localhost:3000/{{ game.cover }}"
                 />
                 <label class="position-absolute bottom-0 end-0 mb-3 me-3">
                     <i
@@ -21,14 +21,11 @@
                         class="bi bi-plus text-info"
                     ></i>
 
-                    <i
-                        style="cursor: pointer; font-size: 70px"
-                        class="bi bi-image text-info"
-                    ></i
-                    ><!-- Ikona za mijenjanje slika -->
+                    <!-- Ikona za mijenjanje slika -->
                     <input
                         type="file"
                         style="display: none; visibility: none"
+                        (change)="uploadCoverForGame($event)"
                     />
                 </label>
             </div>
