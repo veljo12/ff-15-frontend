@@ -15,8 +15,6 @@ h4 {
 }
 
 .card {
-    border-color: #20262e;
-
     border-style: hidden;
     cursor: pointer;
 }
@@ -27,4 +25,20 @@ h4 {
 
 .borderColor:hover {
     border-color: turquoise;
+}
+.delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 0;
+    font-size: 30px;
+}
+.edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding: 0;
+    font-size: 30px;
 }

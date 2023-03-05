@@ -46,24 +46,53 @@
         <nav class="p-4 navBar">
             <ul class="nav col-12 col-lg-auto me-lg-auto">
                 <li>
-                    <a routerLink="/" class="nav-link px-0 ms-0">Overview</a>
-                </li>
-                <li>
-                    <a routerLink="/contact" class="nav-link px-0 ms-0"
-                        >Contact</a
+                    <a
+                        [routerLinkActive]="'active'"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        routerLink="/single-game/{{ game.id }}"
+                        class="nav-link px-0 ms-0"
+                        >Overview</a
                     >
                 </li>
                 <li>
-                    <a routerLink="/games" class="nav-link px-0 ms-0">Games</a>
+                    <a
+                        [routerLinkActive]="'active'"
+                        routerLink="/single-game/{{ game.id }}/ranking"
+                        class="nav-link px-0 ms-0"
+                        >Ranking</a
+                    >
                 </li>
                 <li>
-                    <a href="#" class="nav-link px-0 ms-0">Store</a>
+                    <a
+                        [routerLinkActive]="'active'"
+                        routerLink="/games"
+                        class="nav-link px-0 ms-0"
+                        >Games</a
+                    >
                 </li>
                 <li>
-                    <a href="#" class="nav-link px-0 ms-0">FAQs</a>
+                    <a
+                        [routerLinkActive]="'active'"
+                        href="#"
+                        class="nav-link px-0 ms-0"
+                        >Store</a
+                    >
                 </li>
                 <li>
-                    <a href="#" class="nav-link ppx-0 ms-0">About</a>
+                    <a
+                        [routerLinkActive]="'active'"
+                        href="#"
+                        class="nav-link px-0 ms-0"
+                        >FAQs</a
+                    >
+                </li>
+                <li>
+                    <a
+                        [routerLinkActive]="'active'"
+                        href="#"
+                        class="nav-link ppx-0 ms-0"
+                        >About</a
+                    >
                 </li>
             </ul>
         </nav>

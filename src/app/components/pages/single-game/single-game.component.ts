@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Games from './../../../models/Games';
 import { GamesService } from './../../../services/games.service';
 import { ToastrService } from 'ngx-toastr';

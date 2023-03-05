@@ -1,3 +1,7 @@
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 <div style="background-color: #0f0e0e">
     <div class="container tabela">
         <h1>Games</h1>
@@ -18,11 +22,24 @@
 
         <div class="row row-cols-1 row-cols-md-6 g-3">
             <div *ngFor="let g of games" class="col">
-                <div class="card" routerLink="/single-game/{{ g.id }}">
-                    <img src="http://localhost:3000/{{ g.image }}" />
+                <div class="card">
+                    <img
+                        routerLink="/single-game/{{ g.id }}"
+                        src="http://localhost:3000/{{ g.image }}"
+                    />
+
+                    <button class="btn delete" (click)="deleteGame(g.id)">
+                        <i class="fa fa-trash text-danger"></i>
+                    </button>
+                    <button
+                        class="btn edit"
+                        routerLink="/admin/edit-game/{{ g.id }}"
+                    >
+                        <i class="fa fa-edit text-info"></i>
+                    </button>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <!-- <button
+
+                <!-- <button
                         type="button"
                         class="btn btn-info mx-2 mt-3 mb-2"
                         routerLink="/admin/edit-game/{{ g.id }}"
@@ -36,7 +53,6 @@
                     >
                         Delete
                     </button> -->
-                </div>
             </div>
         </div>
 
