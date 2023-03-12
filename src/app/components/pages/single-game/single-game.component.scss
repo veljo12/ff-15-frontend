@@ -103,7 +103,7 @@
 }
 .nav-link {
     margin-right: 2vw;
-    color: #a39ea8;
+    color: #95acda;
 }
 .nav-link:hover {
     color: white;
@@ -111,8 +111,9 @@
 .nav {
     font-size: large;
     font-weight: bold;
-    border-bottom: solid 1px #a39ea8;
+    border-bottom: solid 1px #95acda;
 }
 .active {
+    color: white;
     border-bottom: solid 2px turquoise;
 }

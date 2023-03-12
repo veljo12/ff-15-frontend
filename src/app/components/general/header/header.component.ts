@@ -1,4 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './../../../services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -7,10 +9,22 @@ import { Component, OnInit, HostListener } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
     headerVariable = true;
+    isLoggedIn = false;
 
-    constructor() {}
+    constructor(private authService: AuthService, private router: Router) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.isLoggedIn = this.authService.isLoggedIn();
+
+        this.authService.getLoggedInSubject().forEach((ev) => {
+            console.log('isLoggedIn is changed', ev);
+            this.isLoggedIn = ev;
+            // Zato sto se ne mijenjaju dugmad u hederu za logout
+        });
+    }
+    logout() {
+        this.authService.logout();
+    }
 
     @HostListener('window:scroll', ['$event'])
     onWindowScroll() {

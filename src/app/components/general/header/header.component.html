@@ -48,10 +48,30 @@
             </ul>
 
             <div class="text-end">
-                <button type="button" class="btn btn-outline-dark me-2">
+                <button
+                    *ngIf="!isLoggedIn"
+                    routerLink="/login"
+                    type="button"
+                    class="btn btn-outline-dark me-2"
+                >
                     Login
                 </button>
-                <button type="button" class="btn btn-danger">Sign-up</button>
+                <button
+                    *ngIf="!isLoggedIn"
+                    type="button"
+                    class="btn btn-danger"
+                    routerLink="/register"
+                >
+                    Sign-up
+                </button>
+                <button
+                    (click)="logout()"
+                    *ngIf="isLoggedIn"
+                    type="button"
+                    class="btn btn-outline-dark me-2"
+                >
+                    Logout
+                </button>
             </div>
         </div>
     </div>
