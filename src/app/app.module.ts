@@ -9,7 +9,8 @@ import { ContactComponent } from './components/pages/contact/contact.component';
 import { GeneralModule } from './components/general/general.module';
 import { ToastrModule } from 'ngx-toastr';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
     declarations: [AppComponent, HomeComponent, ContactComponent],
@@ -21,7 +22,13 @@ import { HttpClientModule } from '@angular/common/http';
         BrowserAnimationsModule,
         ToastrModule.forRoot({ positionClass: 'toast-top-center' }),
     ],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

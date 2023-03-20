@@ -11,14 +11,14 @@ export class GamesService {
     constructor(private httpClient: HttpClient) {}
 
     getAllGames = () => {
-        const token = localStorage.getItem('ff-15-token');
-        const a = this.httpClient.get<Games[]>(this.apiUrl, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        console.log(`getallgames = ${a}`);
-        return a;
+        // const token = localStorage.getItem('ff-15-token');
+        // const a = this.httpClient.get<Games[]>(this.apiUrl, {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //     },
+        // });
+        // console.log(`getallgames = ${a}`);
+        return this.httpClient.get<Games[]>(this.apiUrl); // Dodali smo interceptore
     };
 
     getGameById = (id: number) => {
