@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddEditGameComponent } from './add-edit-game/add-edit-game.component';
+import { AdminGuard } from './../../guards/admin.guard';
+import { AddEditGameComponent } from './../admin/add-edit-game/add-edit-game.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'add-game', component: AddEditGameComponent },
-    { path: 'edit-game/:id', component: AddEditGameComponent },
+    {
+        path: 'add-game',
+        component: AddEditGameComponent,
+        canActivate: [AdminGuard],
+    },
+    {
+        path: 'edit-game/:id',
+        component: AddEditGameComponent,
+        canActivate: [AdminGuard],
+    },
 ];
 
 @NgModule({
