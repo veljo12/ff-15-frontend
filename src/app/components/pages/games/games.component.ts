@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GamesService } from './../../../services/games.service';
 import Games from './../../../models/Games';
 import { ToastrService } from 'ngx-toastr';
+import User from './../../../models/User';
+import { AuthService } from './../../../services/auth.service';
 
 @Component({
     selector: 'app-games',
@@ -10,8 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GamesComponent implements OnInit {
     games: Games[] = [];
+    user: User = new User();
 
     constructor(
+        private authService: AuthService,
         private gamesService: GamesService,
         private tostrService: ToastrService
     ) {}
@@ -20,6 +24,7 @@ export class GamesComponent implements OnInit {
         this.gamesService.getAllGames().subscribe((data) => {
             this.games = data;
         });
+        this.user = this.authService.getLoggedInUserData();
     }
 
     deleteGame(id: number) {
@@ -32,7 +37,7 @@ export class GamesComponent implements OnInit {
                         this.games = gameData;
                     });
                 } else {
-                    this.tostrService.error('Error while deleting vehicle!');
+                    this.tostrService.error('Error while deleting game!');
                 }
             });
         }

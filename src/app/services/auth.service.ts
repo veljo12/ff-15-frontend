@@ -39,4 +39,14 @@ export class AuthService {
         if (localStorage.getItem('ff-15-token')) return true;
         return false;
     };
+
+    getLoggedInUserData = (): any => {
+        const token = localStorage.getItem('ff-15-token');
+        if (!token) {
+            return null;
+        }
+        const secondPart = token.split('.')[1];
+        const userString = window.atob(secondPart); //string
+        return JSON.parse(userString);
+    };
 }

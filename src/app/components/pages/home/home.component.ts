@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../../services/auth.service';
 
 @Component({
     selector: 'app-home',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-    constructor() {}
+    isLoggedIn = false;
 
-    ngOnInit(): void {}
+    constructor(private authService: AuthService) {}
+
+    ngOnInit(): void {
+        this.isLoggedIn = this.authService.isLoggedIn();
+        this.authService.getLoggedInSubject().forEach((ev) => {
+            this.isLoggedIn = ev;
+            // Da singup dugme nestane bez refresha
+        });
+    }
 }

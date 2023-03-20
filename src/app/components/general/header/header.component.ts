@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import User from './../../../models/User';
 import { AuthService } from './../../../services/auth.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthService } from './../../../services/auth.service';
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+    user: User = new User();
     headerVariable = true;
     isLoggedIn = false;
 
@@ -20,6 +22,10 @@ export class HeaderComponent implements OnInit {
             console.log('isLoggedIn is changed', ev);
             this.isLoggedIn = ev;
             // Zato sto se ne mijenjaju dugmad u hederu za logout
+            if (ev === true) {
+                this.user = this.authService.getLoggedInUserData();
+                console.log('USER: ', this.user);
+            }
         });
     }
     logout() {
