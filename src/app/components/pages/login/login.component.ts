@@ -20,20 +20,19 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {}
 
     login() {
-        if (!this.user.username || !this.user.username) {
+        if (!this.user.username || !this.user.password) {
             this.tostrService.error('Please insert all details!');
             return;
-        } else {
-            this.authService.login(this.user).subscribe((data: any) => {
-                if (data.success) {
-                    localStorage.setItem('ff-15-token', data.token);
-                    this.authService.loggedInSuccess();
-                    this.tostrService.success('Logged in!');
-                    this.router.navigateByUrl('');
-                } else {
-                    this.tostrService.error('Not valid credentials!');
-                }
-            });
         }
+        this.authService.login(this.user).subscribe((data: any) => {
+            if (data.success) {
+                localStorage.setItem('ff-15-token', data.token);
+                this.authService.loggedInSuccess();
+                this.tostrService.success('Logged in!');
+                this.router.navigateByUrl('');
+            } else {
+                this.tostrService.error('Not valid credentials!');
+            }
+        });
     }
 }

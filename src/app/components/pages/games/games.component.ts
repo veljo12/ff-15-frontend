@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesService } from './../../../services/games.service';
 import Games from './../../../models/Games';
-import { ToastrService } from 'ngx-toastr';
 import User from './../../../models/User';
+
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../services/auth.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { AuthService } from './../../../services/auth.service';
 export class GamesComponent implements OnInit {
     games: Games[] = [];
     user: User = new User();
+    isLoggedIn = false;
 
     constructor(
         private authService: AuthService,
@@ -24,7 +26,21 @@ export class GamesComponent implements OnInit {
         this.gamesService.getAllGames().subscribe((data) => {
             this.games = data;
         });
-        this.user = this.authService.getLoggedInUserData();
+
+        this.checkUser();
+    }
+
+    checkUser() {
+        this.isLoggedIn = this.authService.isLoggedIn();
+        // Provjeravamo da li je logovan
+        if (this.isLoggedIn) {
+            const userData = (this.user =
+                this.authService.getLoggedInUserData());
+            // Provjeravamo da li je user
+            if (userData.isAdmin === 1) {
+                this.user.isAdmin = true;
+            }
+        }
     }
 
     deleteGame(id: number) {

@@ -24,7 +24,13 @@
             <div *ngFor="let g of games" class="col">
                 <div class="card">
                     <img
+                        *ngIf="isLoggedIn"
                         routerLink="/single-game/{{ g.id }}"
+                        src="http://localhost:3000/{{ g.image }}"
+                    />
+                    <img
+                        *ngIf="!isLoggedIn"
+                        routerLink="/login"
                         src="http://localhost:3000/{{ g.image }}"
                     />
 
