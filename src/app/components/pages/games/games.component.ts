@@ -5,6 +5,7 @@ import User from './../../../models/User';
 
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../services/auth.service';
+import { UserService } from './../../../services/user.service';
 
 @Component({
     selector: 'app-games',
@@ -27,20 +28,9 @@ export class GamesComponent implements OnInit {
             this.games = data;
         });
 
-        this.checkUser();
-    }
-
-    checkUser() {
         this.isLoggedIn = this.authService.isLoggedIn();
-        // Provjeravamo da li je logovan
-        if (this.isLoggedIn) {
-            const userData = (this.user =
-                this.authService.getLoggedInUserData());
-            // Provjeravamo da li je user
-            if (userData.isAdmin === 1) {
-                this.user.isAdmin = true;
-            }
-        }
+        // If the user is logged in get information about role
+        if (this.isLoggedIn) this.user = this.authService.getLoggedInUserData();
     }
 
     deleteGame(id: number) {

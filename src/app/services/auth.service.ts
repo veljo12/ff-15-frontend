@@ -13,11 +13,11 @@ export class AuthService {
     constructor(private http: HttpClient, private router: Router) {}
 
     login = (user: User) => {
-        return this.http.post('http://localhost:3000/login', user);
+        return this.http.post('http://localhost:3000/users/login', user);
     };
 
     register = (user: User) => {
-        return this.http.post('http://localhost:3000/register', user);
+        return this.http.post('http://localhost:3000/users/register', user);
     };
 
     loggedInSuccess = () => {

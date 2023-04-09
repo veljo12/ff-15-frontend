@@ -1,17 +1,29 @@
 <div class="containerr">
     <div
         class="background"
-        style="background-image: url('http://localhost:3000/{{ game.cover }} ')"
+        [style.background-image]="
+            'linear-gradient(to top, #171c26 , transparent), url(http://localhost:3000/' +
+            game.cover +
+            ')'
+        "
     ></div>
+    <!-- style="background-image:url('http://localhost:3000/{{ game.cover }}')" ovako je trebalo ali nije htjelo linear da doda -->
 
     <div class="row ajmo">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-4">
-            <img class="imagee" src="http://localhost:3000/{{ game.image }}" />
-            <label class="imageIcon">
-                <i
-                    style="cursor: pointer; font-size: 25px"
-                    class="bi bi-three-dots text-info"
-                ></i>
+        <div class="dva col-lg-3 col-md-4 col-sm-4 col-4">
+            <img
+                [class.ngImage]="!user.isAdmin"
+                class="imagee"
+                src="http://localhost:3000/{{ game.image }}"
+            />
+            <label
+                *ngIf="user.isAdmin"
+                class="imageIcon"
+                title="Update game picture"
+            >
+                <div class="changeGamePicture">
+                    <i class="bi bi-camera-fill cameraIcon"></i>
+                </div>
 
                 <input
                     type="file"
@@ -19,8 +31,14 @@
                     (change)="uploadImageForGame($event)"
                 />
             </label>
-            <label class="coverIcon">
-                <i class="bi bi-three-dots text-info"></i>
+            <label *ngIf="user.isAdmin" class="coverIcon">
+                <div class="changeBanner">
+                    <i class="bi bi-camera-fill"></i>
+                    <span
+                        style="font-size: small; font-weight: bold; margin: 7px"
+                        >Upload banner</span
+                    >
+                </div>
 
                 <input
                     type="file"

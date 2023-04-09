@@ -1,0 +1,95 @@
+<div class="containerr">
+    <div
+        class="background"
+        [style.background-image]="
+            'linear-gradient(to top, #171c26 , transparent), url(http://localhost:3000/' +
+            user.cover +
+            ')'
+        "
+    >
+        <label>
+            <div class="changeProfilePicture" title="Update profile picture">
+                <i class="bi bi-camera-fill cameraIcon"></i>
+            </div>
+            <input
+                type="file"
+                style="display: none; visibility: none"
+                (change)="uploadImageForUser($event)"
+            />
+        </label>
+        <label>
+            <div class="changeBanner">
+                <i class="bi bi-camera-fill"></i>
+                <span style="font-size: small; font-weight: bold; margin: 7px"
+                    >Upload banner</span
+                >
+            </div>
+            <input
+                type="file"
+                style="display: none; visibility: none"
+                (change)="uploadCoverForUser($event)"
+            />
+        </label>
+    </div>
+
+    <div class="row profilePicAndUsername">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-4">
+            <img
+                class="imagee"
+                [style.background-image]="
+                    'url(http://localhost:3000/' + user.image + ')'
+                "
+            />
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8 col-8">
+            <h1 class="text">{{ user.username }}</h1>
+        </div>
+    </div>
+
+    <div class="addFriendAndMessage">
+        <button type="button" class="messageButton">Message</button>
+        <button type="button" class="addFriendButton">Add-Friend</button>
+    </div>
+
+    <div class="container">
+        <div class="userGameWinrate">
+            <div class="child child1">
+                <i class="bi bi-pc-display-horizontal"></i>
+                <div>
+                    <select
+                        style="cursor: pointer"
+                        class="form-control"
+                        name="gameGenre"
+                        [ngStyle]="{
+                            border: 'none',
+
+                            'background-color': '#171C26',
+                            color: 'white'
+                        }"
+                    >
+                        <option value="MOBA">League Of Legends</option>
+                        <option value="Tactical first-person shooter">
+                            Tactical first-person shooter
+                        </option>
+                        <option value="Round-based strategy">
+                            Round-based strategy
+                        </option>
+                        <option value="Tactical first-person shooter">
+                            Tactical first-person shooter
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="child child2">
+                <i class="bi bi-play-fill"></i>
+                <div><span>2</span></div>
+            </div>
+            <div class="child child3">
+                <i class="bi bi-trophy-fill"></i>
+                <div>
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@ import { AddEditGameComponent } from './../admin/add-edit-game/add-edit-game.com
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: HomeComponent, canActivate: [AdminGuard] },
     {
         path: 'add-game',
         component: AddEditGameComponent,

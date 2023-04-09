@@ -8,6 +8,8 @@ import { SingleGameComponent } from './single-game/single-game.component';
 import { RankingComponent } from './sg-pages/ranking/ranking.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UsersComponent } from './users/users.component';
+import { SingleUserComponent } from './single-user/single-user.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
     { path: 'single-game/:id/ranking', component: RankingComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'users', component: UsersComponent },
+    { path: 'users/:id', component: SingleUserComponent },
 ];
 
 @NgModule({

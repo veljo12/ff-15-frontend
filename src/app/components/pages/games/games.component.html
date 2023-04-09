@@ -2,7 +2,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
-<div style="background-color: #0f0e0e">
+<div style="background-color: #171c26">
     <div class="container tabela">
         <h1>Games</h1>
 
@@ -12,7 +12,8 @@
                 placeholder="Search for game..."
                 class="form-control search-input borderColor"
                 style="
-                    background-color: #0f0e0e;
+                    background-color: #12161e;
+                    border-color: #2f384c;
                     color: whitesmoke;
                     margin-bottom: 20px;
                     margin-top: 20px;
@@ -22,7 +23,7 @@
 
         <div class="row row-cols-1 row-cols-md-6 g-3">
             <div *ngFor="let g of games" class="col">
-                <div class="card">
+                <div [class.ngCard]="!user.isAdmin" class="card">
                     <img
                         *ngIf="isLoggedIn"
                         routerLink="/single-game/{{ g.id }}"

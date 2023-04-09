@@ -1,7 +1,8 @@
 .tabela {
-    background-color: #0f0e0e;
-    padding-top: 150px;
-    padding-bottom: 200px;
+    background-color: #171c26;
+    padding-top: 120px;
+    padding-bottom: 250px;
+    // border: solid red;
 }
 h1 {
     padding-top: 50px;
@@ -18,13 +19,18 @@ h4 {
     border-style: hidden;
     cursor: pointer;
 }
-.card:hover {
+.ngCard:hover {
     transform: scale(1.08);
     transition: all 0.5s;
 }
 
+// .card:hover {
+//     transform: scale(1.08);
+//     transition: all 0.5s;
+// }
+
 .borderColor:hover {
-    border-color: turquoise;
+    border-color: turquoise !important;
 }
 .delete {
     position: absolute;

@@ -3,7 +3,7 @@
     margin: 0;
     max-width: 100%;
     height: 2000px;
-    background-color: #0f0e0e;
+    background-color: #171c26;
     position: relative;
     overflow: hidden;
 }
@@ -12,7 +12,7 @@
     height: 500px;
 
     background-position: center;
-    background-repeat: no-repeat;
+
     background-size: cover;
     position: absolute;
     top: 0;
@@ -29,21 +29,53 @@
     top: 10%;
     left: 16vw;
 }
-.imagee:hover {
+.ngImage:hover {
     transform: scale(1.08);
     transition: all 0.5s;
 }
+
 .imageIcon {
     position: absolute;
-    top: 8.5%;
-    left: 23.3vw;
+    top: 2.3vh;
+    left: 24vw;
+    z-index: 1;
+    cursor: pointer;
 }
+.changeGamePicture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    color: white;
+    border: solid #171c26 1px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #2f384c;
+}
+.changeGamePicture:hover {
+    background-color: #171c26;
+}
+
 .coverIcon {
     position: absolute;
-    top: 30%;
-    left: 95vw;
-    font-size: 40px;
+    top: -30.5vh;
+    right: -0.14vw;
     cursor: pointer;
+}
+.changeBanner {
+    height: 35px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2f384c;
+    color: white;
+    border: solid #171c26 1px;
+    border-radius: 7px 7px 7px 7px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.changeBanner:hover {
+    background-color: #171c26;
 }
 
 .text {
@@ -79,6 +111,10 @@
     height: 250px;
     top: 18%;
 }
+h1,
+a {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 @media screen and (max-width: 480px) {
     .imagee {
@@ -99,7 +135,7 @@
 // ///////////////////////////////////////
 
 .navBar {
-    background-color: #0f0e0e;
+    background-color: #171c26;
 }
 .nav-link {
     margin-right: 2vw;

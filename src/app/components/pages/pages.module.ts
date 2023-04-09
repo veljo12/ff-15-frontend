@@ -8,6 +8,8 @@ import { RankingComponent } from './sg-pages/ranking/ranking.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
+import { UsersComponent } from './users/users.component';
+import { SingleUserComponent } from './single-user/single-user.component';
 
 @NgModule({
     declarations: [
@@ -16,6 +18,8 @@ import { RegisterComponent } from './register/register.component';
         RankingComponent,
         LoginComponent,
         RegisterComponent,
+        UsersComponent,
+        SingleUserComponent,
     ],
     imports: [CommonModule, PagesRoutingModule, FormsModule],
 })

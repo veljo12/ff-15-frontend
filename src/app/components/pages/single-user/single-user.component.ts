@@ -1,55 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import Games from './../../../models/Games';
-import { GamesService } from './../../../services/games.service';
-import { AuthService } from './../../../services/auth.service';
-import { ToastrService } from 'ngx-toastr';
 import User from './../../../models/User';
+import { UserService } from './../../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    selector: 'app-single-game',
-    templateUrl: './single-game.component.html',
-    styleUrls: ['./single-game.component.scss'],
+    selector: 'app-single-user',
+    templateUrl: './single-user.component.html',
+    styleUrls: ['./single-user.component.scss'],
 })
-export class SingleGameComponent implements OnInit {
+export class SingleUserComponent implements OnInit {
     constructor(
-        private gameService: GamesService,
+        private userService: UserService,
         private activatedRoute: ActivatedRoute,
-        private authService: AuthService,
         private toastrService: ToastrService
     ) {}
 
-    game: Games = new Games();
     user: User = new User();
     fileData: any;
-    isLoggedIn = false;
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params) => {
             if (params['id']) {
+                console.log('aaaaaaaa');
                 console.log(params);
                 const id = params['id'];
-                this.gameService.getGameById(id).subscribe((data) => {
-                    this.game = data;
-                    console.log(this.game);
+                this.userService.getUserById(id).subscribe((data) => {
+                    this.user = data;
+                    console.log('brit', this.user);
                 });
             }
         });
-
-        this.isLoggedIn = this.authService.isLoggedIn();
-        this.user = this.authService.getLoggedInUserData();
     }
 
-    uploadCoverForGame(ev: any) {
+    uploadCoverForUser(ev: any) {
         console.log(`OVO JE ev ${ev}`);
         this.fileData = ev.target.files[0];
         let formData = new FormData();
+
         formData.append('img', this.fileData);
-        this.gameService.uploadImage(formData).subscribe((response: any) => {
+        this.userService.uploadImage(formData).subscribe((response: any) => {
             console.log(`ovo je response ${response}`);
             if (response.status === 0) {
-                this.gameService
-                    .addCoverForGame(this.game.id, response.fileName)
+                this.userService
+                    .addCoverForUser(this.user.id, response.fileName)
                     .subscribe((addImageResponse) => {
                         this.toastrService.success('Cover uploaded!');
                         this.ngOnInit();
@@ -58,16 +52,16 @@ export class SingleGameComponent implements OnInit {
         });
     }
 
-    uploadImageForGame(ev: any) {
+    uploadImageForUser(ev: any) {
         console.log(`OVO JE ev ${ev}`);
         this.fileData = ev.target.files[0];
         let formData = new FormData();
         formData.append('img', this.fileData);
-        this.gameService.uploadImage(formData).subscribe((response: any) => {
+        this.userService.uploadImage(formData).subscribe((response: any) => {
             console.log(`ovo je response ${response}`);
             if (response.status === 0) {
-                this.gameService
-                    .addImageForGame(this.game.id, response.fileName)
+                this.userService
+                    .addImageForUser(this.user.id, response.fileName)
                     .subscribe((addImageResponse) => {
                         this.toastrService.success('Image uploaded!');
                         this.ngOnInit();

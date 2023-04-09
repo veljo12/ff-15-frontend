@@ -1,9 +1,22 @@
 {
+    "singleQuote": true,
     "trailingComma": "es5",
     "printWidth": 80,
-    "singleQuote": true,
+    
     "useTabs": false,
     "tabWidth": 4,
     "semi": true,
-    "bracketSpacing": true
+    "bracketSpacing": true,
+    "eslintIntegration": true,
+    "overrides": [
+        {
+          "files": ["*.js", "*.jsx", "*.ts", "*.tsx","*.html"],
+          "options": {
+            
+          }
+        }
+      ],
+      "ignore": ["**/*.html"]
+    
 }
+

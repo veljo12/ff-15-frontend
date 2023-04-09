@@ -1,0 +1,281 @@
+.containerr {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    height: 2000px;
+    background-color: #171c26;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background {
+    margin-top: 55px;
+    height: 500px;
+    background-size: cover;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.profilePicAndUsername {
+    // border: solid red;
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    top: 21%;
+}
+
+.imagee {
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    height: 160px;
+    width: 160px;
+    top: -400px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 1px; //jer mi se pojavljuju bijele linije oko slike
+}
+.changeProfilePicture {
+    position: absolute;
+    top: 33vh;
+    left: 52.5vw;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border: solid #171c26 1px;
+    border-radius: 50%;
+    background-color: #2f384c;
+    cursor: pointer;
+}
+.changeProfilePicture:hover {
+    background-color: #171c26;
+}
+.cameraIcon {
+    color: white;
+}
+.changeBanner {
+    height: 35px;
+    width: 150px;
+
+    position: absolute;
+    top: 1vh;
+    right: 0.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2f384c;
+    color: white;
+    border: solid #171c26 1px;
+    border-radius: 7px 7px 7px 7px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.changeBanner:hover {
+    background-color: #171c26;
+}
+
+.text {
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70px;
+    margin-top: 70px;
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.addFriendAndMessage {
+    position: absolute;
+    // border: solid red;
+    top: 28.5%;
+    width: 100%;
+    height: 100px;
+}
+.messageButton {
+    position: absolute;
+    left: 41.5vw;
+    top: -60%;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px 20px 20px 20px;
+    border-style: none;
+    background-color: #708090;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+}
+.addFriendButton {
+    position: absolute;
+    left: 50vw;
+    top: -60%;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px 20px 20px 20px;
+    border-style: none;
+    background-color: #16b2ca;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.addFriendButton:hover {
+    background-color: #11899c;
+    transition: 0.7s;
+}
+
+.messageButton:hover {
+    background-color: #36454f;
+}
+
+///////////////////////////////
+
+.container {
+    padding: 0;
+    position: absolute;
+    top: 33.4%;
+    //    r boder: solid red;
+    height: 1325px;
+}
+
+.userGameWinrate {
+    position: relative;
+    top: -5%;
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    // border: solid red;
+}
+.child {
+    flex: 1;
+}
+.child1 {
+    border: solid #95acda;
+    border-width: thin;
+    border-radius: 10px 10px 10px 10px;
+    margin: 10px;
+}
+.child2 {
+    border: solid #95acda;
+    border-width: thin;
+    border-radius: 10px 10px 10px 10px;
+    margin: 10px;
+}
+.child3 {
+    border: solid #95acda;
+    border-width: thin;
+    border-radius: 10px 10px 10px 10px;
+    margin: 10px;
+}
+.child1 i {
+    position: relative;
+    top: 25%;
+    left: 1.5vw;
+    font-size: 25px;
+    color: #95acda;
+}
+.child2 i {
+    position: relative;
+    top: 10%;
+    left: 1vw;
+    font-size: 40px;
+    color: #95acda;
+}
+
+.child3 i {
+    position: relative;
+    top: 25%;
+    left: 1.5vw;
+    font-size: 25px;
+    color: #95acda;
+}
+.child1 div {
+    position: absolute;
+    // border: solid 1px red;
+    height: 38px;
+    width: 18vw;
+    top: 3vh;
+    left: 4vw;
+}
+.child2 div {
+    position: absolute;
+    // border: solid 1px red;
+    height: 38px;
+    width: 18vw;
+    top: 3vh;
+    left: 27.6vw;
+}
+.child2 span {
+    position: relative;
+    top: 20%;
+    left: 2%;
+    color: white;
+}
+.child3 div {
+    position: absolute;
+    // border: solid 1px red;
+    height: 38px;
+    width: 18vw;
+    top: 3vh;
+    left: 51.2vw;
+}
+.child3 span {
+    position: relative;
+    top: 20%;
+    left: 3%;
+    color: white;
+}
+
+@media screen and (max-width: 480px) {
+    .background {
+        margin-top: 200px; // pomjeri ove kad budes mijenjao hedder
+        height: 300px; /// pomjeri ove kad budes mijenjao hedder
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    .imagee {
+        left: 3vw;
+        height: 115px;
+        width: 115px;
+    }
+    .messageButton {
+        position: absolute;
+        left: 13vw;
+        top: 20%;
+    }
+    .addFriendButton {
+        position: absolute;
+        left: 53vw;
+        top: 20%;
+    }
+
+    .child1 div {
+        top: 3vh;
+        left: 11vw;
+    }
+    .child2 div {
+        top: 3vh;
+        left: 45vw;
+    }
+    .child2 span {
+        left: 2vw;
+    }
+    .child3 div {
+        top: 3vh;
+        left: 78vw;
+    }
+    .child3 span {
+        left: 1vw;
+    }
+}
