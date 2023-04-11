@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import User from './../../../models/User';
 import { UserService } from './../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './../../../services/auth.service';
 
 @Component({
     selector: 'app-single-user',
@@ -13,21 +14,23 @@ export class SingleUserComponent implements OnInit {
     constructor(
         private userService: UserService,
         private activatedRoute: ActivatedRoute,
+        private authService: AuthService,
         private toastrService: ToastrService
     ) {}
 
     user: User = new User();
+    loggedUser: User = new User();
+    showButtons: boolean;
     fileData: any;
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params) => {
             if (params['id']) {
-                console.log('aaaaaaaa');
-                console.log(params);
                 const id = params['id'];
                 this.userService.getUserById(id).subscribe((data) => {
                     this.user = data;
-                    console.log('brit', this.user);
+                    this.loggedUser = this.authService.getLoggedInUserData();
+                    this.showButtons = this.loggedUser.id == this.user.id; // If the user with this route is the same as the logged-in user, then show the buttons
                 });
             }
         });
@@ -57,13 +60,17 @@ export class SingleUserComponent implements OnInit {
         this.fileData = ev.target.files[0];
         let formData = new FormData();
         formData.append('img', this.fileData);
+        console.log('SLIKA', this.fileData);
+
         this.userService.uploadImage(formData).subscribe((response: any) => {
-            console.log(`ovo je response ${response}`);
+            console.log(JSON.stringify(response));
+
             if (response.status === 0) {
                 this.userService
                     .addImageForUser(this.user.id, response.fileName)
                     .subscribe((addImageResponse) => {
                         this.toastrService.success('Image uploaded!');
+                        this.userService.updateUserImage(response.fileName);
                         this.ngOnInit();
                     });
             }

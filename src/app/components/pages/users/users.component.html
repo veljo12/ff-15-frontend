@@ -1,0 +1,48 @@
+<div
+    style="padding-top: 180px; height: 2000px; background-color: #171c26"
+    class="background"
+>
+    <div style="margin-bottom: 500px" class="container">
+        <h1>Players</h1>
+
+        <div class="input-group mb-3">
+            <input
+                type="text"
+                placeholder="Search for a player..."
+                class="form-control search-input borderColor"
+                style="
+                    background-color: #12161e;
+                    border-color: #2f384c;
+                    color: whitesmoke;
+                    margin-bottom: 20px;
+                    margin-top: 20px;
+                "
+            />
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th style="font-size: smaller" scope="col">#</th>
+                    <th style="font-size: smaller" scope="col">USER</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let u of filteredUsers; let i = index">
+                    <tr>
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>
+                            <img
+                                class="imagee"
+                                src="http://localhost:3000/{{ u.image }}"
+                                alt=""
+                            />
+                            {{ u.username }}
+                        </td>
+                        <td routerLink="/users/{{ u.id }}">View profile</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -44,6 +44,10 @@ export class HeaderComponent implements OnInit {
         this.user = this.authService.getLoggedInUserData();
         this.getUserData(this.user.id);
 
+        this.userService.getUserImageAsObservable().subscribe((image) => {
+            this.user.image = image;
+        });
+
         this.hideDivWhenChangeRoute();
     }
 

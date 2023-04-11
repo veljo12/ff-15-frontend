@@ -1,0 +1,42 @@
+.table {
+    color: #95acda;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #2f384c;
+}
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+    color: whitesmoke;
+}
+h1 {
+    color: whitesmoke;
+}
+.borderColor:hover {
+    border-color: turquoise !important;
+}
+tr {
+    border-bottom: 1px solid #95acda;
+}
+
+td:nth-child(3) {
+    position: absolute;
+    right: 20vw;
+}
+td:nth-child(3) {
+    border-style: none;
+}
+td:nth-child(3):hover {
+    color: turquoise !important;
+    cursor: pointer;
+}
+.imagee {
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+    padding: 1px;
+    width: 34px;
+    height: 32px;
+    cursor: pointer;
+}

@@ -8,7 +8,11 @@
         "
     >
         <label>
-            <div class="changeProfilePicture" title="Update profile picture">
+            <div
+                *ngIf="showButtons"
+                class="changeProfilePicture"
+                title="Update profile picture"
+            >
                 <i class="bi bi-camera-fill cameraIcon"></i>
             </div>
             <input
@@ -18,7 +22,7 @@
             />
         </label>
         <label>
-            <div class="changeBanner">
+            <div *ngIf="showButtons" class="changeBanner">
                 <i class="bi bi-camera-fill"></i>
                 <span style="font-size: small; font-weight: bold; margin: 7px"
                     >Upload banner</span
@@ -47,8 +51,12 @@
     </div>
 
     <div class="addFriendAndMessage">
-        <button type="button" class="messageButton">Message</button>
-        <button type="button" class="addFriendButton">Add-Friend</button>
+        <button *ngIf="!showButtons" type="button" class="messageButton">
+            Message
+        </button>
+        <button *ngIf="!showButtons" type="button" class="addFriendButton">
+            Add-Friend
+        </button>
     </div>
 
     <div class="container">
