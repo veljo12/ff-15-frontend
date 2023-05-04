@@ -51,12 +51,175 @@
     </div>
 
     <div class="addFriendAndMessage">
-        <button *ngIf="!showButtons" type="button" class="messageButton">
-            Message
+        <button *ngIf="!showButtons" class="messageButton">Message</button>
+
+        <button
+            (click)="sendFriendRequest()"
+            *ngIf="!showButtons && status === ''"
+            class="addFriendButton"
+        >
+            Add Friend
         </button>
-        <button *ngIf="!showButtons" type="button" class="addFriendButton">
-            Add-Friend
+
+        <button
+            (click)="toggleDiv()"
+            *ngIf="!showButtons && status === 'pending' && sender === true"
+            class="addFriendButton"
+        >
+            Remove Request
         </button>
+
+        <button
+            (click)="acceptFriendRequest()"
+            *ngIf="!showButtons && status === 'pending' && sender === false"
+            class="addFriendButton"
+        >
+            Accept
+        </button>
+
+        <button
+            *ngIf="!showButtons && status === 'accepted'"
+            class="addFriendButton"
+        >
+            Challenge
+        </button>
+    </div>
+
+    <!-- Hidden Div -->
+
+    <div *ngIf="showDiv" class="overlay">
+        <div
+            class="animate__animated animate__pulse"
+            style="
+                height: 270px;
+                width: 370px;
+                border-radius: 15px;
+                position: fixed;
+                top: 7%;
+                left: 40%;
+
+                background-color: #1f2633;
+            "
+        >
+            <div
+                style="
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    height: 50px;
+                    width: 50px;
+                    /* background-color: blue; */
+
+                    color: #95acda;
+                    font-size: 33px;
+                    text-align: center;
+                    z-index: 1;
+                "
+            >
+                <i (click)="closeHiddenDiv()" class="bi bi-x closeDiv"></i>
+            </div>
+            <div
+                style="
+                    position: absolute;
+                    top: 3vh;
+                    height: 40px;
+                    width: 320px;
+
+                    margin-left: 20px;
+                    text-align: center;
+                "
+            >
+                <i
+                    style="color: white; font-size: 32px"
+                    class="bi bi-exclamation-triangle-fill"
+                ></i>
+            </div>
+            <div
+                style="
+                    position: absolute;
+                    top: 8vh;
+                    height: 40px;
+                    width: 320px;
+
+                    margin-left: 20px;
+                    padding-left: 30px;
+                    padding-right: 30px;
+                    text-align: center;
+                "
+            >
+                <h2 style="color: white; font-weight: bolder">
+                    Remove request
+                </h2>
+            </div>
+            <div
+                style="
+                    position: absolute;
+
+                    top: 13vh;
+                    height: 40px;
+                    width: 320px;
+                    padding-left: 30px;
+                    padding-right: 30px;
+                    margin-left: 20px;
+                    text-align: center;
+                    font-size: 15px;
+                "
+            >
+                <span style="color: #95acda"
+                    >Do you want to remove the friend request sent to
+                    {{ user.username }}?</span
+                >
+            </div>
+
+            <div
+                style="
+                    position: absolute;
+
+                    top: 20vh;
+                    height: 50px;
+                    width: 320px;
+
+                    margin-left: 20px;
+                    text-align: center;
+                    font-size: 15px;
+                "
+            >
+                <button
+                    (click)="closeHiddenDiv()"
+                    class="cancelButton"
+                    style="
+                        width: 95px;
+                        height: 40px;
+                        border-radius: 20px;
+                        margin-right: 10px;
+                        background-color: #2f384c;
+                        font-size: 11px;
+                        font-weight: bold;
+                        color: white;
+                        border: hidden;
+                    "
+                >
+                    CANCEL
+                </button>
+                <button
+                    (click)="cancelFriendRequest()"
+                    class="yesButton"
+                    style="
+                        width: 95px;
+                        height: 40px;
+                        border-radius: 20px;
+
+                        background-color: #f36f21;
+                        font-size: 11px;
+                        font-weight: bold;
+                        color: white;
+                        border: hidden;
+                    "
+                >
+                    YES
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="container">

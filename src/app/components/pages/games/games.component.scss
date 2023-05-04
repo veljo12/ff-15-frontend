@@ -24,13 +24,13 @@ h4 {
     transition: all 0.5s;
 }
 
-// .card:hover {
-//     transform: scale(1.08);
-//     transition: all 0.5s;
-// }
-
 .borderColor:hover {
+    border-style: solid 1px !important;
     border-color: turquoise !important;
+}
+.borderColor:focus {
+    box-shadow: none;
+    outline: 1px solid turquoise;
 }
 .delete {
     position: absolute;

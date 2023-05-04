@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
             if (data.success) {
                 localStorage.setItem('ff-15-token', data.token);
                 this.authService.loggedInSuccess();
-                this.tostrService.success('Logged in!');
+
                 this.router.navigateByUrl('');
             } else {
                 this.tostrService.error('Not valid credentials!');

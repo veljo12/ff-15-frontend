@@ -139,6 +139,12 @@
     background-color: #36454f;
 }
 
+.yesButton:hover {
+    background-color: #d5570c !important;
+}
+.cancelButton:hover {
+    background-color: #364259 !important;
+}
 ///////////////////////////////
 
 .container {
@@ -234,6 +240,20 @@
     position: relative;
     top: 20%;
     left: 3%;
+    color: white;
+}
+
+.overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    overflow: hidden;
+}
+.closeDiv:hover {
+    cursor: pointer;
     color: white;
 }
 

@@ -19,8 +19,25 @@
         background-color: #1f2633;
         border: ridge 1px #12161e;
     }
+    .notHiddenDiv {
+        transition: all 1s;
+        background-color: #1f2633;
+        border: ridge 1px #12161e;
+    }
+    .notHiddenDiv table {
+        color: white;
+    }
     .threeIconsDiv {
         border-right: solid #95acda 1px !important;
+    }
+    .table-hover tbody tr:hover {
+        background-color: #2f384c;
+    }
+    .table-hover tbody tr td:hover {
+        color: white;
+    }
+    .table-hover tfoot tr:hover {
+        background-color: #2f384c;
     }
 
     .chatIcon,
@@ -75,10 +92,10 @@
     margin-left: 15px;
     margin-top: 3px;
 }
-.searchHeader:hover {
-    border-style: solid !important;
 
-    border-color: turquoise;
+.searchHeader:focus {
+    outline: 1.5px solid turquoise;
+    box-shadow: none;
 }
 .username {
     position: absolute;
@@ -119,7 +136,7 @@
     position: absolute;
     right: 5vw;
     top: -0.8vh;
-    font-size: 22px;
+    font-size: 20px;
     cursor: pointer;
 }
 
@@ -127,7 +144,7 @@
     position: absolute;
     right: 3vw;
     top: -0.8vh;
-    font-size: 22px;
+    font-size: 20px;
     cursor: pointer;
 }
 
@@ -135,13 +152,31 @@
     position: absolute;
     right: 1vw;
     top: -0.8vh;
-    font-size: 22px;
+    font-size: 20px;
     cursor: pointer;
 }
+.notificationNumber {
+    position: absolute;
+    right: 0.6vw;
+    top: -1.2vh;
+    width: 17px;
+    height: 17px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: x-small;
+}
+
 .hiddenDiv {
     position: absolute;
-    top: 109%;
-    width: 100%;
+    top: 73%;
+    right: 0vw;
+    width: 95%;
     background-color: whitesmoke;
     height: 400px;
     border-bottom: ridge 1px gray;
@@ -150,4 +185,33 @@
     border-radius: 10px 10px 10px 10px;
     color: white;
     animation-duration: 0.04s;
+}
+
+.notHiddenDiv {
+    position: absolute;
+    top: 78%;
+    right: 15vw;
+    width: 150%;
+    background-color: whitesmoke;
+    height: 44vh;
+    border-bottom: ridge 1px gray;
+    border-left: ridge 1px gray;
+    border-right: ridge 1px gray;
+    border-radius: 10px;
+
+    animation-duration: 0.04s;
+}
+.active {
+    border-bottom: solid 2px turquoise;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #eaebee;
+}
+.table-hover tfoot tr:hover {
+    background-color: #eaebee;
+}
+.table-hover tfoot tr td:hover {
+    color: turquoise;
+    cursor: pointer;
 }

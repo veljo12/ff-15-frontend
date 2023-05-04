@@ -1,0 +1,43 @@
+<div style="background-color: #171c26; padding-top: 180px">
+    <div class="container">
+        <div style="margin-bottom: 40px">
+            <span style="color: white; font-size: 55px; font-weight: bold"
+                >Notifications</span
+            >
+        </div>
+        <div style="margin-bottom: 20px">
+            <span style="color: white; font-size: 30px; font-weight: bold"
+                >Notifications</span
+            >
+        </div>
+        <table class="table table-hover">
+            <tbody>
+                <ng-container *ngFor="let n of notifications; let i = index">
+                    <tr routerLink="/users/{{ n.sender_id }}" class="tableRows">
+                        <td
+                            style="
+                                width: 80px;
+                                text-align: center;
+                                padding-left: 20px;
+                            "
+                        >
+                            <img
+                                class="imagee"
+                                src="http://localhost:3000/{{
+                                    notificationImages[i]
+                                }}"
+                            />
+                        </td>
+
+                        <td style="text-align: left">
+                            <span> {{ n.message }}</span>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <span style="color: white; font-size: small"
+            >Showing all notifications...</span
+        >
+    </div>
+</div>

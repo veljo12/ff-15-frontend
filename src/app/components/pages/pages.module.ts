@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
 import { SingleUserComponent } from './single-user/single-user.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { SingleUserComponent } from './single-user/single-user.component';
         RegisterComponent,
         UsersComponent,
         SingleUserComponent,
+        NotificationsComponent,
     ],
     imports: [CommonModule, PagesRoutingModule, FormsModule],
 })
