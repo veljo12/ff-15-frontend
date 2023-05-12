@@ -13,8 +13,14 @@ h1 {
     color: whitesmoke;
 }
 .borderColor:hover {
-    border-color: turquoise !important;
+    outline: 1px solid turquoise;
 }
+
+.borderColor:focus {
+    box-shadow: none;
+    outline: 1px solid turquoise;
+}
+
 tr {
     border-bottom: 1px solid #95acda;
 }
@@ -30,6 +36,7 @@ td:nth-child(3):hover {
     color: turquoise !important;
     cursor: pointer;
 }
+
 .imagee {
     background-position: center;
     background-size: cover;

@@ -25,13 +25,13 @@ h4 {
 }
 
 .borderColor:hover {
-    border-style: solid 1px !important;
-    border-color: turquoise !important;
+    outline: 1px solid turquoise;
 }
 .borderColor:focus {
     box-shadow: none;
     outline: 1px solid turquoise;
 }
+
 .delete {
     position: absolute;
     top: 0;

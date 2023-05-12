@@ -51,7 +51,13 @@
     </div>
 
     <div class="addFriendAndMessage">
-        <button *ngIf="!showButtons" class="messageButton">Message</button>
+        <button
+            (click)="toggleBottomChat()"
+            *ngIf="!showButtons"
+            class="messageButton"
+        >
+            Message
+        </button>
 
         <button
             (click)="sendFriendRequest()"

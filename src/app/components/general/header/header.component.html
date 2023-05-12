@@ -129,7 +129,14 @@
                         <button
                             style="display: none; visibility: none"
                             class="arrowButton"
+                            (click)="toggleDivChats()"
                         ></button>
+                        <div
+                            *ngIf="unreadMessagesNumber > 0"
+                            class="messagesNumber"
+                        >
+                            {{ unreadMessagesNumber }}
+                        </div>
                     </label>
 
                     <label>
@@ -179,11 +186,129 @@
                             (click)="toggleDiv()"
                         ></button>
                     </label>
+                    <!-- Chats -->
+                    <div
+                        class="animate__animated animate__pulse chatsHiddenDiv"
+                        [hidden]="!showDivChats"
+                    >
+                        <table
+                            style="padding: 0; margin: 0"
+                            class="table table-hover"
+                        >
+                            <thead>
+                                <tr>
+                                    <th
+                                        style="
+                                            font-size: larger;
+
+                                            text-align: left;
+                                            padding-left: 1vw;
+                                            border: none;
+                                        "
+                                        scope="col"
+                                    >
+                                        Chats
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container
+                                    *ngFor="
+                                        let m of lastFiveMessages;
+                                        let i = index
+                                    "
+                                >
+                                    <tr>
+                                        <td
+                                            style="
+                                                cursor: pointer;
+                                                height: 68px;
+                                                display: flex;
+                                                text-align: left;
+                                                border: none;
+                                                padding-left: 1vw;
+                                            "
+                                            (click)="showMessages(i)"
+                                        >
+                                            <div>
+                                                <img
+                                                    style="
+                                                        border-radius: 50%;
+                                                        width: 52px;
+                                                        height: 52px;
+
+                                                        cursor: pointer;
+                                                    "
+                                                    src="http://localhost:3000/{{
+                                                        senderImagesForChat[i]
+                                                    }}"
+                                                />
+                                            </div>
+                                            <div style="padding-left: 15px">
+                                                <div style="font-weight: 500">
+                                                    {{ m.sender_username }}
+                                                </div>
+                                                <div style="color: #60759f">
+                                                    <span>
+                                                        {{
+                                                            m.message.length >
+                                                            18
+                                                                ? m.message.slice(
+                                                                      0,
+                                                                      18
+                                                                  ) + '...'
+                                                                : m.message
+                                                        }}
+                                                    </span>
+                                                    <small
+                                                        style="
+                                                            position: absolute;
+                                                            right: 0;
+
+                                                            margin-right: 10px;
+                                                        "
+                                                        >{{
+                                                            formattedTimes[i]
+                                                        }}</small
+                                                    >
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                            <tfoot>
+                                <tr
+                                    style="
+                                        position: absolute;
+                                        bottom: 0;
+                                        height: 45px;
+                                        width: 100%;
+
+                                        border-top: solid 1px #60759f;
+                                        border-radius: 0 0 10px 10px;
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <td
+                                        routerLink="/users/notifications/{{
+                                            user.id
+                                        }}"
+                                        style="border: none; text-align: center"
+                                    >
+                                        See all in inbox
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- Notifications -->
                     <div
                         class="animate__animated animate__pulse notHiddenDiv"
                         [hidden]="!showDivNot"
                     >
-                        <!-- Notifications -->
                         <table
                             style="padding: 0; margin: 0"
                             class="table table-hover"
@@ -212,7 +337,7 @@
                                         <td
                                             style="
                                                 cursor: pointer;
-                                                height: 7vh;
+                                                height: 68px;
                                                 display: flex;
                                                 text-align: left;
                                                 border: none;
@@ -263,7 +388,7 @@
                                     style="
                                         position: absolute;
                                         bottom: 0;
-                                        height: 4.5vh;
+                                        height: 45px;
                                         width: 100%;
 
                                         border-top: solid 1px #60759f;
@@ -300,6 +425,243 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Bottom Chat -->
+    <div
+        *ngIf="showBottomChat"
+        style="
+            position: fixed;
+            bottom: 0;
+            right: 4vw;
+            width: 278px;
+            height: 351px;
+        "
+    >
+        <!-- Bottom Chat Header -->
+        <div
+            *ngIf="showBottomChatHeader == false"
+            (click)="toggleBottomChatHeader()"
+            class="bottomChatHeader"
+        >
+            <img
+                class="bottomChatImage"
+                src="http://localhost:3000/{{ senderImageForBottomChatUser }}"
+            />
+
+            <span routerLink="/users/{{ senderId }}" class="bottomChatusername"
+                >{{ senderUsernameForBottomChat }}
+            </span>
+
+            <label>
+                <i
+                    style="
+                        color: #95acda;
+                        position: absolute;
+                        font-size: 16px;
+                        top: 13px;
+                        right: 50px;
+                    "
+                    class="bi bi-box-arrow-up-right bottomChatIcons"
+                    title="Open in inbox"
+                ></i>
+                <button
+                    style="display: none; visibility: none"
+                    class="arrowButton"
+                ></button>
+            </label>
+            <div>
+                <label (click)="toggleBottomChat()">
+                    <i
+                        style="
+                            color: #95acda;
+                            position: absolute;
+                            font-size: 19px;
+
+                            top: 13px;
+                            right: 20px;
+                        "
+                        class="bi bi-x-lg bottomChatIcons"
+                        title="Close tab"
+                    ></i>
+                    <button
+                        style="display: none; visibility: none"
+                        class="arrowButton"
+                    ></button>
+                </label>
+            </div>
+        </div>
+
+        <!-- Bottom Chat Header v2 -->
+        <div
+            *ngIf="showBottomChatHeader == true"
+            (click)="toggleBottomChatHeader()"
+            class="bottomChatHeader"
+            style="position: absolute; top: 297px"
+        >
+            <img
+                class="bottomChatImage"
+                src="http://localhost:3000/{{ senderImageForBottomChatUser }}"
+            />
+
+            <span routerLink="/users/{{ senderId }}" class="bottomChatusername"
+                >{{ senderUsernameForBottomChat }}
+            </span>
+
+            <label>
+                <i
+                    style="
+                        color: #95acda;
+                        position: absolute;
+                        font-size: 16px;
+                        top: 13px;
+                        right: 50px;
+                    "
+                    class="bi bi-box-arrow-up-right bottomChatIcons"
+                    title="Open in inbox"
+                ></i>
+                <button
+                    style="display: none; visibility: none"
+                    class="arrowButton"
+                ></button>
+            </label>
+            <label (click)="toggleBottomChat()">
+                <i
+                    style="
+                        color: #95acda;
+                        position: absolute;
+                        font-size: 19px;
+
+                        top: 13px;
+                        right: 20px;
+                    "
+                    class="bi bi-x-lg bottomChatIcons"
+                    title="Close tab"
+                ></i>
+                <button
+                    (click)="toggleBottomChat()"
+                    style="display: none; visibility: none"
+                    class="arrowButton"
+                ></button>
+            </label>
+        </div>
+
+        <div
+            *ngIf="showBottomChatHeader == false"
+            style="
+                width: 100%;
+                height: 300px;
+                position: absolute;
+                bottom: 51px;
+                left: 0;
+                overflow: auto;
+
+                background-color: #1f2633;
+
+                border: solid 1px #2f384c;
+            "
+        >
+            <div
+                *ngFor="let m of allMessagesBetweenTwoUsers; let i = index"
+                style="
+                    display: flex;
+                    align-items: stretch;
+                    width: 100%;
+                    padding-top: 10px;
+                    /* border-bottom: solid 1px #2f384c; */
+                "
+            >
+                <div
+                    style="
+                        position: relative;
+                        width: 50px;
+
+                        display: inline-block;
+                    "
+                >
+                    <img
+                        *ngIf="this.user.id !== m.sender_id"
+                        style="
+                            position: absolute;
+                            bottom: -12px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            border-radius: 50%;
+                            width: 32px;
+                            height: 32px;
+                            margin-bottom: 10px;
+
+                            cursor: pointer;
+                        "
+                        src="http://localhost:3000/{{
+                            senderImageForBottomChatUser
+                        }}"
+                    />
+                </div>
+                <div
+                    *ngIf="this.user.id !== m.sender_id"
+                    class="botChatMessages"
+                    [title]="m.message_time | date : 'dd.MM.yyyy, HH:mm'"
+                >
+                    {{ m.message }}
+                </div>
+                <div
+                    *ngIf="this.user.id == m.sender_id"
+                    class="botChatMessages"
+                    style="background-color: #16b2ca; margin: 1px 10px 1px auto"
+                    [title]="m.message_time | date : 'dd.MM.yyyy, HH:mm'"
+                >
+                    {{ m.message }}
+                </div>
+            </div>
+        </div>
+        <div
+            *ngIf="showBottomChatHeader == false"
+            style="
+                width: 100%;
+                height: 52px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: #1f2633;
+                padding-left: 10px;
+
+                border: solid 1px #2f384c;
+            "
+        >
+            <input
+                type="text"
+                placeholder="Aa"
+                class="form-control search-input borderColor"
+                style="
+                    position: absolute;
+                    top: 7px;
+                    height: 35px;
+                    width: 225px;
+                    background-color: #12161e;
+                    border: solid 2px #2f384c;
+                    color: whitesmoke;
+                "
+                [(ngModel)]="messageToBeSent"
+            />
+            <label (click)="sendMessage()">
+                <i
+                    style="
+                        color: #95acda;
+                        position: absolute;
+                        font-size: 33px;
+                        top: -2px;
+                        right: -5px;
+                        margin-right: 10px;
+                    "
+                    class="bi bi-play bottomChatSendButton"
+                ></i>
+                <button
+                    style="display: none; visibility: none"
+                    class="arrowButton"
+                ></button>
+            </label>
         </div>
     </div>
 </header>

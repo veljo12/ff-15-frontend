@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import User from './../../../models/User';
 import { UserService } from './../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../services/auth.service';
+import { ChatsService } from './../../../services/chats.service';
 
 @Component({
     selector: 'app-single-user',
@@ -15,7 +16,8 @@ export class SingleUserComponent implements OnInit {
         private userService: UserService,
         private activatedRoute: ActivatedRoute,
         private authService: AuthService,
-        private toastrService: ToastrService
+        private toastrService: ToastrService,
+        private chatService: ChatsService
     ) {}
 
     user: User = new User();
@@ -51,6 +53,10 @@ export class SingleUserComponent implements OnInit {
     }
     closeHiddenDiv() {
         this.showDiv = false;
+    }
+
+    toggleBottomChat() {
+        this.chatService.showDiv(true);
     }
 
     uploadCoverForUser(ev: any) {

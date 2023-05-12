@@ -35,7 +35,6 @@ export class NotificationsComponent implements OnInit {
                         .getAllNotificationImages(receiverId)
                         .subscribe((images) => {
                             this.notificationImages = images;
-                            console.log(this.notificationImages);
                         });
                 });
             });
