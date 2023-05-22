@@ -47,16 +47,16 @@ export class SingleUserComponent implements OnInit {
             }
         });
     }
+    chatWithUser() {
+        this.chatService.setUserToChatWith(this.user);
+        this.chatService.showDiv(true);
+    }
 
     toggleDiv() {
         this.showDiv = !this.showDiv;
     }
     closeHiddenDiv() {
         this.showDiv = false;
-    }
-
-    toggleBottomChat() {
-        this.chatService.showDiv(true);
     }
 
     uploadCoverForUser(ev: any) {

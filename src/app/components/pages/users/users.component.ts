@@ -10,8 +10,10 @@ import { AuthService } from './../../../services/auth.service';
 })
 export class UsersComponent implements OnInit {
     users: User[] = [];
+    withoutAdmin: User[];
     filteredUsers: User[];
     user: User = new User();
+    isLoggedIn = false;
 
     constructor(
         private userService: UserService,
@@ -22,13 +24,17 @@ export class UsersComponent implements OnInit {
         this.userService.getAllUsers().subscribe((data) => {
             this.users = data;
 
+            // Without admin
+            this.withoutAdmin = this.users.filter((u) => !u.isAdmin);
+
             // Filter out current user and admin
             this.filteredUsers = this.users.filter(
                 (u) => u.username !== this.user.username && !u.isAdmin
             );
         });
+        this.isLoggedIn = this.authService.isLoggedIn();
 
-        this.user = this.authService.getLoggedInUserData();
+        if (this.isLoggedIn) this.user = this.authService.getLoggedInUserData();
         this.getUserData(this.user.id);
     }
 

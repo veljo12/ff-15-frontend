@@ -1,4 +1,11 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    HostListener,
+    ElementRef,
+    AfterViewChecked,
+    ViewChild,
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router, NavigationStart } from '@angular/router';
 
@@ -9,6 +16,7 @@ import { AuthService } from './../../../services/auth.service';
 import { filter } from 'rxjs/operators';
 import Notifications from './../../../models/Notifications';
 import Chats from './../../../models/Chats';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-header',
@@ -16,9 +24,8 @@ import Chats from './../../../models/Chats';
     styleUrls: ['./header.component.scss'],
     providers: [DatePipe],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewChecked {
     user: User = new User();
-
     lastFiveNot: Notifications[] = [];
     lastFiveMessages: Chats[] = [];
     allMessagesBetweenTwoUsers: Chats[] = [];
@@ -41,10 +48,12 @@ export class HeaderComponent implements OnInit {
     senderImageForBottomChatUser: string;
     senderUsernameForBottomChat: string;
     messageToBeSent: string;
+
     senderImages: string[] = [];
     senderImagesForChat: string[] = [];
-
     formattedTimes: string[] = [];
+
+    @ViewChild('messageContainer') private messageContainer: ElementRef;
 
     constructor(
         private datePipe: DatePipe,
@@ -54,6 +63,7 @@ export class HeaderComponent implements OnInit {
         private chatsService: ChatsService,
         private router: Router
     ) {
+        // Change from single-user component
         this.chatsService.showDiv$.subscribe((show) => {
             this.showBottomChat = show;
         });
@@ -99,27 +109,87 @@ export class HeaderComponent implements OnInit {
                                 });
                         });
                     });
+                this.lastFiveMessages = [];
 
                 this.chatsService
                     .getLastFiveMessages(this.user.id)
                     .subscribe((response) => {
-                        this.lastFiveMessages = response;
+                        response.forEach((data) => {
+                            if (this.user.id == data.sender_id) {
+                                const switchId = data.receiver_id;
+                                data.receiver_id = data.sender_id;
+                                data.sender_id = switchId;
+                                data.sender_username = data.receiver_username;
+                            }
+                            this.lastFiveMessages.push(data);
+                        });
+                        let groupBySenderId: any = {};
+                        this.lastFiveMessages.forEach((message) => {
+                            // If this is the first message from this sender, or if this message's id is larger than the previous one stored,
+                            // update the stored message for this sender.
+                            if (
+                                !groupBySenderId[message.sender_id] ||
+                                groupBySenderId[message.sender_id].id <
+                                    message.id
+                            ) {
+                                groupBySenderId[message.sender_id] = message;
+                            }
+                        });
 
+                        this.lastFiveMessages = Object.values(groupBySenderId);
+
+                        this.lastFiveMessages.sort((a, b) => b.id - a.id);
+
+                        this.lastFiveMessages = this.lastFiveMessages.slice(
+                            0,
+                            5
+                        );
+
+                        // Fetch and format images
+                        const getSenderImages = async () => {
+                            let senderImages = [];
+                            for (let data of this.lastFiveMessages) {
+                                try {
+                                    const images = await firstValueFrom(
+                                        this.chatsService.senderImagesForChat(
+                                            data.sender_id
+                                        )
+                                    );
+                                    senderImages.push(images);
+                                } catch (error) {
+                                    console.error(
+                                        'Error getting images:',
+                                        error
+                                    );
+                                }
+                            }
+                            return senderImages;
+                        };
+
+                        getSenderImages().then((senderImages) => {
+                            this.senderImagesForChat = senderImages;
+                        });
+
+                        // Format times
                         this.lastFiveMessages.forEach((data) => {
-                            const receiverId = data.receiver_id;
-
-                            this.chatsService
-                                .senderImagesForChat(receiverId)
-                                .subscribe((images) => {
-                                    this.senderImagesForChat = images;
-                                });
                             const formattedTime = this.datePipe.transform(
                                 data.message_time,
                                 'dd.MM.yyyy, HH:mm'
                             );
                             this.formattedTimes.push(formattedTime);
                         });
+
+                        this.chatsService
+                            .getMessagesBetweenTwoUsers(
+                                this.senderId,
+                                this.user.id
+                            )
+                            .subscribe((response) => {
+                                this.allMessagesBetweenTwoUsers = response;
+                            });
                     });
+            } else {
+                this.showBottomChat = false;
             }
         });
         // Retrieve user information when page is refreshed
@@ -129,6 +199,18 @@ export class HeaderComponent implements OnInit {
 
         this.userService.getUserImageAsObservable().subscribe((image) => {
             this.user.image = image;
+        });
+        // Message user from single-user component
+
+        this.chatsService.getUserToChatWith().subscribe((user) => {
+            this.senderImageForBottomChatUser = user.image;
+            this.senderId = user.id;
+            this.senderUsernameForBottomChat = user.username;
+            this.chatsService
+                .getMessagesBetweenTwoUsers(this.senderId, this.user.id)
+                .subscribe((response) => {
+                    this.allMessagesBetweenTwoUsers = response;
+                });
         });
 
         this.chatsService
@@ -161,46 +243,100 @@ export class HeaderComponent implements OnInit {
                 });
             });
 
+        this.lastFiveMessages = [];
+        this.index = parseInt(localStorage.getItem('index'), 10);
+
         this.chatsService
             .getLastFiveMessages(this.user.id)
             .subscribe((response) => {
-                const index = parseInt(localStorage.getItem('index'), 10);
-                this.lastFiveMessages = response;
+                response.forEach((data) => {
+                    if (this.user.id == data.sender_id) {
+                        const switchId = data.receiver_id;
+                        data.receiver_id = data.sender_id;
+                        data.sender_id = switchId;
+                        data.sender_username = data.receiver_username;
+                    }
+                    this.lastFiveMessages.push(data);
+                });
+                let groupBySenderId: any = {};
+                this.lastFiveMessages.forEach((message) => {
+                    // If this is the first message from this sender, or if this message's id is larger than the previous one stored,
+                    // update the stored message for this sender.
+                    if (
+                        !groupBySenderId[message.sender_id] ||
+                        groupBySenderId[message.sender_id].id < message.id
+                    ) {
+                        groupBySenderId[message.sender_id] = message;
+                    }
+                });
 
+                this.lastFiveMessages = Object.values(groupBySenderId);
+
+                this.lastFiveMessages.sort((a, b) => b.id - a.id);
+
+                this.lastFiveMessages = this.lastFiveMessages.slice(0, 5);
+
+                // Fetch and format images
+                const getSenderImages = async () => {
+                    let senderImages = [];
+                    for (let data of this.lastFiveMessages) {
+                        try {
+                            const images = await firstValueFrom(
+                                this.chatsService.senderImagesForChat(
+                                    data.sender_id
+                                )
+                            );
+                            senderImages.push(images);
+                        } catch (error) {
+                            console.error('Error getting images:', error);
+                        }
+                    }
+                    return senderImages;
+                };
+
+                getSenderImages().then((senderImages) => {
+                    this.senderImagesForChat = senderImages;
+                    this.senderImageForBottomChatUser =
+                        this.senderImagesForChat[this.index];
+                });
+
+                // Format times
                 this.lastFiveMessages.forEach((data) => {
-                    const receiverId = data.receiver_id;
-
-                    this.chatsService
-                        .senderImagesForChat(receiverId)
-                        .subscribe((images) => {
-                            this.senderImagesForChat = images;
-                            this.senderImageForBottomChatUser =
-                                this.senderImagesForChat[index];
-                        });
                     const formattedTime = this.datePipe.transform(
                         data.message_time,
                         'dd.MM.yyyy, HH:mm'
                     );
                     this.formattedTimes.push(formattedTime);
                 });
-                this.senderId = this.lastFiveMessages[index].sender_id;
+
+                this.senderId = this.lastFiveMessages[this.index].sender_id;
                 this.senderUsernameForBottomChat =
-                    this.lastFiveMessages[index].sender_username;
+                    this.lastFiveMessages[this.index].sender_username;
 
                 this.chatsService
                     .getMessagesBetweenTwoUsers(this.senderId, this.user.id)
                     .subscribe((response) => {
                         this.allMessagesBetweenTwoUsers = response;
-
-                        this.showBottomChat = true;
-                        this.showBottomChatHeader = false;
+                        this.showBottomChat =
+                            localStorage.getItem('showBottomChat') === 'true';
                     });
             });
 
         this.hideDivWhenChangeRoute();
     }
 
-    //////////
+    ngAfterViewChecked() {
+        this.scrollToBottom();
+    }
+
+    // Functions
+
+    scrollToBottom(): void {
+        try {
+            this.messageContainer.nativeElement.scrollTop =
+                this.messageContainer.nativeElement.scrollHeight;
+        } catch (err) {}
+    }
 
     showMessages(index: number) {
         this.senderId = this.lastFiveMessages[index].sender_id;
@@ -217,6 +353,10 @@ export class HeaderComponent implements OnInit {
 
                 this.showBottomChat = true;
                 this.showBottomChatHeader = false;
+                localStorage.setItem(
+                    'showBottomChat',
+                    this.showBottomChat.toString()
+                );
             });
     }
 
@@ -225,21 +365,28 @@ export class HeaderComponent implements OnInit {
             return;
         }
 
-        this.sendingMessage = true;
+        // Check if the message to be sent is empty or consists only of whitespace.
+        if (!this.messageToBeSent || !this.messageToBeSent.trim()) {
+            console.warn('Cannot send an empty message.');
+            return;
+        }
 
+        this.sendingMessage = true;
         this.chatsService
             .sendMessage(this.user.id, this.senderId, this.messageToBeSent)
-            .subscribe(
-                (response: any) => {
+            .subscribe({
+                next: (response: any) => {
                     this.messageToBeSent = response.message;
                     this.sendingMessage = false;
                     this.ngOnInit();
+                    this.index = 0;
+                    localStorage.setItem('index', this.index.toString());
                 },
-                (error) => {
+                error: (error) => {
                     console.error('Error sending message:', error);
                     this.sendingMessage = false;
-                }
-            );
+                },
+            });
     }
 
     getUserData(id: number) {
@@ -276,6 +423,10 @@ export class HeaderComponent implements OnInit {
 
     toggleBottomChat() {
         this.showBottomChat = !this.showBottomChat;
+    }
+    closeBottomChat() {
+        this.showBottomChat = !this.showBottomChat;
+        localStorage.removeItem('showBottomChat');
     }
     toggleBottomChatHeader() {
         this.showBottomChatHeader = !this.showBottomChatHeader;

@@ -6,6 +6,7 @@ class Notifications {
     is_read: number;
     message_time: Date;
     sender_username: string;
+    receiver_username: string;
 }
 
 export default Notifications;

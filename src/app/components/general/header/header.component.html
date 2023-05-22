@@ -472,7 +472,7 @@
                 ></button>
             </label>
             <div>
-                <label (click)="toggleBottomChat()">
+                <label (click)="closeBottomChat()">
                     <i
                         style="
                             color: #95acda;
@@ -510,17 +510,6 @@
             </span>
 
             <label>
-                <i
-                    style="
-                        color: #95acda;
-                        position: absolute;
-                        font-size: 16px;
-                        top: 13px;
-                        right: 50px;
-                    "
-                    class="bi bi-box-arrow-up-right bottomChatIcons"
-                    title="Open in inbox"
-                ></i>
                 <button
                     style="display: none; visibility: none"
                     class="arrowButton"
@@ -549,6 +538,7 @@
 
         <div
             *ngIf="showBottomChatHeader == false"
+            #messageContainer
             style="
                 width: 100%;
                 height: 300px;
@@ -569,6 +559,7 @@
                     align-items: stretch;
                     width: 100%;
                     padding-top: 10px;
+
                     /* border-bottom: solid 1px #2f384c; */
                 "
             >

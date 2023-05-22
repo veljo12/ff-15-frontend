@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Chats from '../models/Chats';
 import { Subject } from 'rxjs';
+import User from './../models/User';
 
 @Injectable({
     providedIn: 'root',
@@ -10,8 +11,17 @@ export class ChatsService {
     apiUrl = 'http://localhost:3000/users/chats';
 
     private showDivSource = new Subject<boolean>();
+    private userToChatWith = new Subject<any>();
 
     constructor(private httpClient: HttpClient) {}
+
+    setUserToChatWith(user: User) {
+        this.userToChatWith.next(user);
+    }
+
+    getUserToChatWith() {
+        return this.userToChatWith.asObservable();
+    }
 
     showDiv$ = this.showDivSource.asObservable();
 
@@ -34,9 +44,9 @@ export class ChatsService {
     };
 
     senderImagesForChat = (id: number) => {
-        return this.httpClient.get<string[]>(
-            `${this.apiUrl}/last/images/${id}`
-        );
+        return this.httpClient.get(`${this.apiUrl}/last/images/${id}`, {
+            responseType: 'text',
+        });
     };
 
     getMessagesBetweenTwoUsers = (sender_id: number, receiver_id: number) => {
