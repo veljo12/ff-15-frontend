@@ -1,5 +1,6 @@
 <div class="containerr">
     <div
+        *ngIf="game.cover"
         class="background"
         [style.background-image]="
             'linear-gradient(to top, #171c26 , transparent), url(http://localhost:3000/' +
@@ -12,6 +13,7 @@
     <div class="row ajmo">
         <div class="dva col-lg-3 col-md-4 col-sm-4 col-4">
             <img
+                *ngIf="game.image"
                 [class.ngImage]="!user.isAdmin"
                 class="imagee"
                 src="http://localhost:3000/{{ game.image }}"

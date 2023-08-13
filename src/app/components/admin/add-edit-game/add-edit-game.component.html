@@ -1,4 +1,4 @@
-<div class="container cont-marg">
+<!-- <div class="container cont-marg">
     <form>
         <div class="row red">
             <div class="col">
@@ -69,4 +69,95 @@
             </div>
         </div>
     </form>
+</div> -->
+<div style="background-color: #171c26; height: 100vh">
+    <div class="container">
+        <div class="window">
+            <div
+                [style.background-image]="
+                    'linear-gradient(to top, #1f2633 10% , transparent), url(http://localhost:3000/' +
+                    game.cover +
+                    ')'
+                "
+                class="cover"
+            ></div>
+            <label class="coverIcon">
+                <div class="changeBanner">
+                    <i class="bi bi-camera-fill"></i>
+                    <span
+                        style="font-size: 10px; font-weight: bold; margin: 7px"
+                        >Upload banner</span
+                    >
+                </div>
+
+                <input
+                    (change)="uploadCover($event)"
+                    type="file"
+                    style="display: none; visibility: none"
+                />
+            </label>
+
+            <img class="imagee" src="http://localhost:3000/{{ game.image }}" />
+            <label class="imageIcon" title="Update game picture">
+                <div class="changeGamePicture">
+                    <i class="bi bi-camera-fill cameraIcon"></i>
+                </div>
+
+                <input
+                    (change)="uploadImage($event)"
+                    type="file"
+                    style="display: none; visibility: none"
+                />
+            </label>
+            <div class="name">
+                <label style="margin-top: 30px">Name Of The Game:</label>
+                <input
+                    placeholder="Enter name of the game..."
+                    type="string"
+                    class="form-control input"
+                    [(ngModel)]="game.name_of_the_game"
+                    name="gameName"
+                />
+            </div>
+            <div class="form-group selectGame">
+                <label style="color: #4c5d7e">Genre:</label>
+                <select
+                    [(ngModel)]="game.genre"
+                    class="form-control"
+                    name="gameGenre"
+                >
+                    <option disabled selected>Select an option</option>
+                    <option value="MOBA">MOBA</option>
+                    <option value="Tactical first-person shooter">
+                        Tactical first-person shooter
+                    </option>
+                    <option value="Round-based strategy">
+                        Round-based strategy
+                    </option>
+                    <option value="Tactical first-person shooter">
+                        Tactical first-person shooter
+                    </option>
+                </select>
+            </div>
+
+            <div class="gameButton">
+                <button
+                    *ngIf="!edit"
+                    (click)="saveGame()"
+                    style="margin-top: 20px"
+                    class="btn btn-info"
+                >
+                    Add game
+                </button>
+                <button
+                    *ngIf="edit"
+                    (click)="saveGame()"
+                    style="margin-top: 20px"
+                    class="btn btn-info"
+                >
+                    Edit game
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -2,3 +2,121 @@
     margin-top: 150px;
     margin-bottom: 500px;
 }
+
+.window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1f2633;
+    height: 400px;
+    width: 800px;
+}
+.cover {
+    position: relative;
+    height: 200px;
+    width: 100%;
+
+    background-size: cover;
+    background-position: center;
+}
+.name {
+    margin-left: 50px;
+    color: #4c5d7e;
+    display: inline-block;
+}
+.input {
+    color: white;
+    background-color: #1f2633;
+    width: 300px;
+    outline: none;
+    border: solid 1px #4c5d7e;
+}
+.input:focus {
+    outline: none;
+    box-shadow: none;
+}
+.imagee {
+    position: absolute;
+    height: 130px;
+    width: 130px;
+    border: solid 1px #4c5d7e;
+    border-radius: 50%;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+.selectGame {
+    position: absolute;
+    top: 230px;
+    margin-right: 50px;
+    right: 5px;
+    display: inline-block;
+    background-color: #1f2633;
+}
+
+.selectGame select {
+    width: 300px;
+    border: solid 1px #4c5d7e;
+    outline: none;
+    background-color: #1f2633;
+    color: white;
+}
+
+.selectGame select:focus {
+    outline: none;
+    box-shadow: none;
+}
+.imageIcon {
+    position: absolute;
+    top: 137px;
+    left: 440px;
+
+    cursor: pointer;
+}
+.changeGamePicture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    color: white;
+    border: solid #171c26 1px;
+    border-radius: 50%;
+    background-color: #2f384c;
+}
+.changeGamePicture:hover {
+    background-color: #171c26;
+}
+.changeBanner {
+    height: 25px;
+    width: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2f384c;
+    color: white;
+    border: solid #171c26 1px;
+    border-radius: 7px 7px 7px 7px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.changeBanner:hover {
+    background-color: #171c26;
+}
+.coverIcon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+.gameButton {
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translate(-50%, -50%);
+}
+.gameButton button {
+    background-color: #708090;
+    border: none;
+    color: white;
+}

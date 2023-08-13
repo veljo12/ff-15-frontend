@@ -27,11 +27,9 @@ export class SingleGameComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.params.subscribe((params) => {
             if (params['id']) {
-                console.log(params);
                 const id = params['id'];
                 this.gameService.getGameById(id).subscribe((data) => {
                     this.game = data;
-                    console.log(this.game);
                 });
             }
         });
@@ -41,12 +39,10 @@ export class SingleGameComponent implements OnInit {
     }
 
     uploadCoverForGame(ev: any) {
-        console.log(`OVO JE ev ${ev}`);
         this.fileData = ev.target.files[0];
         let formData = new FormData();
         formData.append('img', this.fileData);
         this.gameService.uploadImage(formData).subscribe((response: any) => {
-            console.log(`ovo je response ${response}`);
             if (response.status === 0) {
                 this.gameService
                     .addCoverForGame(this.game.id, response.fileName)
@@ -59,12 +55,10 @@ export class SingleGameComponent implements OnInit {
     }
 
     uploadImageForGame(ev: any) {
-        console.log(`OVO JE ev ${ev}`);
         this.fileData = ev.target.files[0];
         let formData = new FormData();
         formData.append('img', this.fileData);
         this.gameService.uploadImage(formData).subscribe((response: any) => {
-            console.log(`ovo je response ${response}`);
             if (response.status === 0) {
                 this.gameService
                     .addImageForGame(this.game.id, response.fileName)

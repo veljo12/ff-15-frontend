@@ -1,0 +1,151 @@
+<div class="containerr">
+    <div class="leftDiv">
+        <div class="chatHeading">
+            <h1 style="color: white; padding-left: 20px">Chats</h1>
+        </div>
+        <div class="leftChat">
+            <div
+                *ngFor="let m of allMessagesForThisUser; let i = index"
+                class="leftChatMessage"
+                [class.active]="activeMessage === i"
+    (click)="showMessages(i); activeMessage = i"
+            >
+                <img
+                    class="leftChatMessageIcon"
+                    src="http://localhost:3000/{{ senderImagesForChat[i] }}"
+                />
+                <div class="groupUsernameAndMessage">
+                    <span>{{ m.sender_username }}</span>
+                    <span style="color: #60759f"
+                        >{{
+                            m.message.length > 18
+                                ? m.message.slice(0, 18) + '...'
+                                : m.message
+                        }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rightDiv">
+        <div class="imageAndUsernameHeading">
+            <img
+                class="imageHeading"
+                src="http://localhost:3000/{{ senderImage }}"
+            />
+            <span style="color: white">{{ senderUsername }}</span>
+        </div>
+
+        <div class="rightDivLeft">
+            <div class="messagesContainer" #messageContainer>
+                <div
+                    *ngFor="let m of allMessagesBetweenTwoUsers; let i = index"
+                    style="
+                        display: flex;
+                        align-items: stretch;
+                        width: 100%;
+                        padding-top: 10px;
+                    "
+                >
+                    <div
+                        style="
+                            position: relative;
+                            width: 50px;
+
+                            display: inline-block;
+                        "
+                    >
+                        <img
+                            *ngIf="this.user.id !== m.sender_id"
+                            style="
+                                position: absolute;
+                                bottom: -12px;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                border-radius: 50%;
+                                width: 40px;
+                                height: 40px;
+                                margin-bottom: 10px;
+
+                                cursor: pointer;
+                            "
+                            src="http://localhost:3000/{{ senderImage }}"
+                        />
+                    </div>
+                    <div
+                        *ngIf="this.user.id !== m.sender_id"
+                        class="messages"
+                        [title]="m.message_time | date : 'dd.MM.yyyy, HH:mm'"
+                    >
+                        {{ m.message }}
+                    </div>
+                    <div
+                        *ngIf="this.user.id == m.sender_id"
+                        class="messages"
+                        style="
+                            background-color: #16b2ca;
+                            margin: 1px 10px 1px auto;
+                        "
+                        [title]="m.message_time | date : 'dd.MM.yyyy, HH:mm'"
+                    >
+                        {{ m.message }}
+                    </div>
+                </div>
+            </div>
+            <div class="messageDiv">
+                <input
+                    (keydown.enter)="sendMessage()"
+                    type="text"
+                    placeholder="Aa"
+                    class="form-control search-input borderColor"
+                    style="
+                        position: absolute;
+                        top: 15px;
+                        height: 70px;
+                        width: 93%;
+                        background-color: #12161e;
+                        border: solid 2px #2f384c;
+                        color: whitesmoke;
+                        margin-left: 30px;
+                    "
+                    [(ngModel)]="messageToBeSent"
+                />
+                <label (click)="sendMessage()">
+                    <i
+                        style="
+                            color: #95acda;
+                            position: absolute;
+                            font-size: 33px;
+                            top: 22px;
+                            right: -5px;
+                            margin-right: 10px;
+                        "
+                        class="bi bi-play bottomChatSendButton"
+                    ></i>
+                    <button
+                        style="display: none; visibility: none"
+                        class="arrowButton"
+                    ></button>
+                </label>
+            </div>
+        </div>
+        <div class="rightDivRight">
+            <div class="imageAndUsername">
+                <img
+                    *ngIf="senderImage"
+                    class="imageRight"
+                    src="http://localhost:3000/{{ senderImage }}"
+                />
+                <img
+                    *ngIf="!senderImage"
+                    class="imageRight"
+                    src="http://localhost:3000/{{ senderImagesForChat[0] }}"
+                />
+
+                <h4 style="margin: 0">{{ senderUsername }}</h4>
+                <span style="color: #95acda">User</span>
+            </div>
+        </div>
+    </div>
+</div>

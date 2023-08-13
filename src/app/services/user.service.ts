@@ -125,6 +125,23 @@ export class UserService {
         );
     };
 
+    sendAcceptedChallengeNotification = (
+        sender_id: number,
+        receiver_id: number
+    ) => {
+        return this.httpClient.post(
+            `${this.apiUrl}/notifications/${sender_id}/accept-challenge/${receiver_id}`,
+            { sender_id, receiver_id }
+        );
+    };
+
+    sendChallengeNotification = (sender_id: number, receiver_id: number) => {
+        return this.httpClient.post(
+            `${this.apiUrl}/notifications/${sender_id}/challenge/${receiver_id}`,
+            { sender_id, receiver_id }
+        );
+    };
+
     getAllNotifications = (id: number) => {
         return this.httpClient.get<Notifications[]>(
             `${this.apiUrl}/notifications/${id}`

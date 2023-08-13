@@ -1,0 +1,46 @@
+<div class="containerr">
+    <div style="padding-top: 200px" class="container">
+        <h1 style="color: white; margin-bottom: 100px">Matches</h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>User 1 ID</th>
+                    <th>User 2 ID</th>
+                    <th>Name of the game</th>
+                    <th>Status</th>
+                    <th>Stake</th>
+                    <th>Choose a Winner</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let m of matches; let i = index">
+                <tr>
+                    <td>{{ m.sender_id }}</td>
+                    <td>{{ m.receiver_id }}</td>
+                    <td>{{ m.name_of_the_game }}</td>
+                    <td *ngIf="matches[i].match_status == 1">Pending</td>
+                    <td *ngIf="matches[i].match_status == 2">Winner User 1</td>
+                    <td *ngIf="matches[i].match_status == 3">Winner User 2</td>
+                    <td>{{ m.total_stake }}</td>
+                    <td>
+                        <button
+                            (click)="user1(m)"
+                            *ngIf="matches[i].match_status == 1"
+                            style="margin-right: 10px"
+                            class="btn btn-info"
+                        >
+                            User 1
+                        </button>
+                        <button
+                            (click)="user2(m)"
+                            *ngIf="matches[i].match_status == 1"
+                            class="btn btn-secondary"
+                        >
+                            User 2
+                        </button>
+                    </td>
+                </tr>
+                <!-- Add more rows if needed -->
+            </tbody>
+        </table>
+    </div>
+</div>

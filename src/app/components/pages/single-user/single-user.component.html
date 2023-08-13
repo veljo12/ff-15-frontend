@@ -1,4 +1,5 @@
 <div class="containerr">
+    <!-- *ngIf="user.cover" -->
     <div
         class="background"
         [style.background-image]="
@@ -39,6 +40,7 @@
     <div class="row profilePicAndUsername">
         <div class="col-lg-3 col-md-4 col-sm-4 col-4">
             <img
+                *ngIf="user.image"
                 class="imagee"
                 [style.background-image]="
                     'url(http://localhost:3000/' + user.image + ')'
@@ -86,6 +88,7 @@
         <button
             *ngIf="!showButtons && status === 'accepted'"
             class="addFriendButton"
+            (click)="challengePlayer()"
         >
             Challenge
         </button>
@@ -225,6 +228,95 @@
                     YES
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- challengeDiv-->
+
+    <div *ngIf="challengeDiv" class="overlay">
+        <div class="challengeUser">
+            <div
+                [style.background-image]="
+                    'linear-gradient(to top, #1f2633 20% , transparent ), url(http://localhost:3000/1677863148518-valorantCover.jpeg)'
+                "
+                class="coverAndInside"
+            >
+                <h2
+                    style="
+                        color: white;
+                        position: absolute;
+                        top: 20%;
+                        left: 50%;
+                        transform: translate(-50%, -20%);
+                        text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+                    "
+                ></h2>
+                <div class="usernameAndImages">
+                    <h5 class="firstUser">{{ loggedUser.username }}</h5>
+                    <img
+                        class="hdImage firstImage"
+                        src="http://localhost:3000/{{ loggedUser.image }}"
+                    />
+                    <img
+                        class="hdImage secondImage"
+                        src="http://localhost:3000/{{ user.image }}"
+                    />
+                    <span class="vs">VS</span>
+                    <h5 class="secondUser">{{ user.username }}</h5>
+                </div>
+            </div>
+            <div class="chooseGameAndStake">
+                <div
+                    (click)="toggleGameDropdown()"
+                    class="chooseGame"
+                    (mousedown)="shrinkElement()"
+                    (mouseup)="resetElement()"
+                    (mouseleave)="resetElement()"
+                    [ngStyle]="{
+                        transform: isShrink ? 'scaleY(0.75)' : 'none',
+                        transition: 'transform 0.3s ease-out'
+                    }"
+                >
+                    <div class="nameGame">
+                        <h6>{{ nameOfTheGame }}</h6>
+                    </div>
+                </div>
+
+                <div class="chooseStake">
+                    <input
+                        class="stakeAmount"
+                        type="text"
+                        [(ngModel)]="tokens"
+                        (keypress)="numberOnly($event)"
+                        placeholder="Enter your stake amount..."
+                    />
+                </div>
+                <button
+                    (click)="cancelChalenge()"
+                    class="messageButton hiddenButton1Posiiton"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    (click)="challenge()"
+                    class="addFriendButton hiddenButton2Posiiton"
+                >
+                    Challenge!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Select Game dropdown -->
+
+    <div *ngIf="selectGameDropdown" class="selectGameDropDown">
+        <div
+            *ngFor="let g of games; let i = index"
+            class="dropdownGame firstOne"
+            (click)="selectGame(i)"
+        >
+            <span>{{ g.name_of_the_game }}</span>
         </div>
     </div>
 

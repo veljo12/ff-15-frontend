@@ -28,6 +28,7 @@ export class ChatsService {
     showDiv(show: boolean) {
         this.showDivSource.next(show);
     }
+
     sendMessage = (sender_id: number, receiver_id: number, message: string) => {
         return this.httpClient.post<string>(
             `${this.apiUrl}/${sender_id}/message/${receiver_id}`,
@@ -35,8 +36,8 @@ export class ChatsService {
         );
     };
 
-    getLastFiveMessages = (id: number) => {
-        return this.httpClient.get<Chats[]>(`${this.apiUrl}/last/${id}`);
+    getAllMessages = (id: number) => {
+        return this.httpClient.get<Chats[]>(`${this.apiUrl}/messages/${id}`);
     };
 
     getUnreadMessagesNumber = (id: number) => {
@@ -53,5 +54,9 @@ export class ChatsService {
         return this.httpClient.get<Chats[]>(
             `${this.apiUrl}/${sender_id}/message/${receiver_id}`
         );
+    };
+
+    markMessagesAsRead = (id: number) => {
+        return this.httpClient.put(`${this.apiUrl}/messages/${id}`, {});
     };
 }

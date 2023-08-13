@@ -29,6 +29,7 @@ export class AddEditGameComponent implements OnInit {
                 const id = params['id'];
                 this.gameService.getGameById(id).subscribe((data) => {
                     this.game = data;
+                    console.log('aj', this.game.image);
                 });
             }
         });
@@ -54,12 +55,16 @@ export class AddEditGameComponent implements OnInit {
         }
     }
 
-    setUploadedImage(ev: any) {
-        console.log(`OVO JE ev ${ev}`);
-        this.fileData = ev.target.files[0];
-    }
+    // setUploadedImage(ev: any) {
+    //     console.log(`OVO JE ev ${ev}`);
+    //     this.fileData = ev.target.files[0];
+    // }
+    // setUploadedCover(ev: any) {
+    //     console.log(`OVO JE ev ${ev}`);
+    // }
 
-    uploadImage() {
+    uploadImage(ev: any) {
+        this.fileData = ev.target.files[0];
         let formData = new FormData();
         formData.append('img', this.fileData);
         this.gameService.uploadImage(formData).subscribe((response: any) => {
@@ -69,7 +74,22 @@ export class AddEditGameComponent implements OnInit {
                     .addImageForGame(this.game.id, response.fileName)
                     .subscribe((addImageResponse) => {
                         this.toastrService.success('Image uploaded!');
-                        this.ngOnInit();
+                        this.game.image = response.fileName;
+                    });
+            }
+        });
+    }
+    uploadCover(ev: any) {
+        this.fileData = ev.target.files[0];
+        let formData = new FormData();
+        formData.append('img', this.fileData);
+        this.gameService.uploadImage(formData).subscribe((response: any) => {
+            if (response.status === 0) {
+                this.gameService
+                    .addCoverForGame(this.game.id, response.fileName)
+                    .subscribe((addImageResponse) => {
+                        this.toastrService.success('Cover uploaded!');
+                        this.game.cover = response.fileName;
                     });
             }
         });

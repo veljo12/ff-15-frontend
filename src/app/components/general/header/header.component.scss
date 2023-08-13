@@ -95,6 +95,98 @@
 .imagee:hover {
     filter: brightness(80%);
 }
+.imagee2 {
+    position: absolute;
+    left: 5px;
+    top: 17px;
+
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin: auto;
+    padding: 1px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.gift {
+    position: absolute;
+    left: 13px;
+    top: 90px;
+    font-size: 17px;
+    color: #95acda;
+}
+.person {
+    position: absolute;
+    left: 13px;
+    top: 140px;
+    font-size: 22px;
+    color: #95acda;
+}
+.gear {
+    position: absolute;
+    left: 13px;
+    top: 190px;
+    font-size: 20px;
+    color: #95acda;
+}
+.globe {
+    position: absolute;
+    left: 13px;
+    top: 240px;
+    font-size: 20px;
+    color: #95acda;
+}
+.arrowRight {
+    position: absolute;
+    left: 13px;
+    top: 290px;
+    font-size: 20px;
+    color: #95acda;
+}
+.referDiv:hover,
+.personDiv:hover,
+.gearDiv:hover,
+.globeDiv:hover,
+.arrowRightiv:hover {
+    background-color: #2f384c;
+    cursor: pointer;
+}
+.refer {
+    position: absolute;
+    left: 40px;
+    top: 92px;
+    font-size: 15px;
+    color: #95acda;
+}
+.profile {
+    position: absolute;
+    left: 40px;
+    top: 142px;
+    font-size: 15px;
+    color: #95acda;
+}
+.settings {
+    position: absolute;
+    left: 40px;
+    top: 192px;
+    font-size: 15px;
+    color: #95acda;
+}
+.language {
+    position: absolute;
+    left: 40px;
+    top: 242px;
+    font-size: 15px;
+    color: #95acda;
+}
+.logOut {
+    position: absolute;
+    left: 40px;
+    top: 292px;
+    font-size: 15px;
+    color: #95acda;
+}
 .bottomChatImage {
     position: absolute;
     left: 10px;
@@ -135,6 +227,15 @@
     color: black;
 }
 .username:hover {
+    color: turquoise;
+    cursor: pointer;
+}
+.username2 {
+    position: absolute;
+    top: 25px;
+    left: 70px;
+}
+.username2:hover {
     color: turquoise;
     cursor: pointer;
 }
@@ -274,9 +375,9 @@
     position: absolute;
     top: 73%;
     right: 0vw;
-    width: 95%;
+    width: 200px;
     background-color: whitesmoke;
-    height: 400px;
+    height: 333px;
     border-bottom: ridge 1px gray;
     border-left: ridge 1px gray;
     border-right: ridge 1px gray;
@@ -334,4 +435,271 @@
 .borderColor:focus {
     box-shadow: none;
     outline: 1px solid turquoise;
+}
+
+// Challange
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100001;
+    overflow: hidden;
+}
+.challengeUser {
+    height: 370px;
+    width: 600px;
+    border-radius: 15px;
+    position: fixed;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #1f2633;
+}
+.generator {
+    position: absolute;
+    display: inline;
+    top: 160px;
+    width: 85%;
+    height: 40px;
+    margin: 15px;
+    border: solid 1px #2f384c;
+}
+.generator:hover {
+    border-color: turquoise;
+}
+.copy {
+    position: absolute;
+    color: white;
+    right: 18px;
+    bottom: 24px;
+}
+.copy:hover {
+    color: turquoise;
+    cursor: pointer;
+}
+
+.messageButton {
+    position: absolute;
+    left: 41.5vw;
+    top: -60%;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px 20px 20px 20px;
+    border-style: none;
+    background-color: #708090;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+}
+.addFriendButton {
+    position: absolute;
+    left: 50vw;
+    top: -60%;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px 20px 20px 20px;
+    border-style: none;
+    background-color: #16b2ca;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.addFriendButton:hover {
+    background-color: #11899c;
+    transition: 0.7s;
+}
+
+.messageButton:hover {
+    background-color: #36454f;
+}
+.coverAndInside {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+    // background-image: url(http://localhost:3000/1677863148518-valorantCover.jpeg);
+    background-size: cover;
+    background-position: center;
+}
+
+.gameNameStatusStake {
+    width: 100%;
+    height: 100px;
+    display: flex;
+}
+.child-div {
+    position: relative;
+    flex: 1;
+}
+.gameName {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #95acda;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+}
+.three {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+}
+
+.usernameAndImages {
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    // background-color: red;
+    text-align: center;
+    cursor: pointer;
+}
+.firstUser {
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    margin-left: 30px;
+    cursor: pointer;
+}
+.firstUser:hover {
+    color: turquoise;
+}
+.secondUser:hover {
+    color: turquoise;
+}
+
+.secondUser {
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 30px;
+}
+.hdImage {
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    color: #95acda;
+    margin: auto;
+    padding: 1px;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.firstImage {
+    position: relative;
+
+    left: -40px;
+}
+.secondImage {
+    position: relative;
+
+    left: 40px;
+}
+.vs {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+.chooseGameAndStake {
+    position: relative;
+    width: 100%;
+    // border: solid 1px red;
+    height: 200px;
+}
+
+.nameGame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.selectGameDropDown {
+    position: fixed;
+    top: 400px;
+    left: 34.2%;
+    z-index: 10001;
+    border-radius: 10px;
+    width: 287px;
+    height: 490px;
+    background-color: #2f384c;
+    overflow-y: auto;
+}
+.dropdownGame {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    color: white;
+
+    cursor: pointer;
+}
+.dropdownGame span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.dropdownGame:hover {
+    background-color: #708090;
+}
+.firstOne {
+    border-radius: 10px 10px 0px 0px;
+}
+.hiddenButton1Posiiton {
+    position: absolute;
+    top: 100px;
+    left: 24%;
+}
+.hiddenButton2Posiiton {
+    position: absolute;
+    top: 100px;
+    left: 51%;
+}
+
+.closeDiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    /* background-color: blue; */
+
+    color: #95acda;
+    font-size: 33px;
+    text-align: center;
+    z-index: 1;
+}
+.closeDiv:hover {
+    cursor: pointer;
+    color: white;
+}
+.dashboard {
+    color: white;
+    position: absolute;
+    right: 20px;
+    top: -3px;
+}
+.dashboard:hover {
+    color: turquoise;
+    cursor: pointer;
 }

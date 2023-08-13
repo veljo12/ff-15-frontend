@@ -113,7 +113,13 @@
                         left: 74vw;
                     "
                 >
-                    <label>
+                    <span
+                        routerLink="/admin/dashboard"
+                        *ngIf="this.user.isAdmin"
+                        class="dashboard"
+                        >DASHBOARD</span
+                    >
+                    <label *ngIf="!this.user.isAdmin">
                         <i
                             class="bi bi-wallet-fill walletIcon"
                             title="Wallet"
@@ -124,12 +130,12 @@
                         ></button>
                     </label>
 
-                    <label>
-                        <i class="bi bi-messenger chatIcon" title="Chats"></i>
+                    <label *ngIf="!this.user.isAdmin">
+                        <i class="bi bi-chat-fill chatIcon" title="Chats"></i>
                         <button
                             style="display: none; visibility: none"
                             class="arrowButton"
-                            (click)="toggleDivChats()"
+                            (click)="toggleDivChats(); markMessageAsRead()"
                         ></button>
                         <div
                             *ngIf="unreadMessagesNumber > 0"
@@ -139,7 +145,7 @@
                         </div>
                     </label>
 
-                    <label>
+                    <label *ngIf="!this.user.isAdmin">
                         <i
                             class="bi bi-bell-fill notificationIcon"
                             title="Notifications"
@@ -168,6 +174,7 @@
                     "
                 >
                     <img
+                        *ngIf="user.image"
                         class="imagee"
                         [style.background-image]="
                             'url(http://localhost:3000/' + user.image + ')'
@@ -232,6 +239,9 @@
                                         >
                                             <div>
                                                 <img
+                                                    *ngIf="
+                                                        senderImagesForChat[i]
+                                                    "
                                                     style="
                                                         border-radius: 50%;
                                                         width: 52px;
@@ -292,7 +302,7 @@
                                     "
                                 >
                                     <td
-                                        routerLink="/users/notifications/{{
+                                        routerLink="users/all-chats/{{
                                             user.id
                                         }}"
                                         style="border: none; text-align: center"
@@ -343,17 +353,15 @@
                                                 border: none;
                                                 padding-left: 1vw;
                                             "
-                                            routerLink="/users/{{
-                                                n.sender_id
-                                            }}"
+                                            (click)="openChallenge(n)"
                                         >
                                             <div>
                                                 <img
+                                                    *ngIf="senderImages[i]"
                                                     style="
                                                         border-radius: 50%;
                                                         width: 52px;
                                                         height: 52px;
-
                                                         cursor: pointer;
                                                     "
                                                     src="http://localhost:3000/{{
@@ -367,7 +375,7 @@
                                                     >{{
                                                         n.message.split(
                                                             'from'
-                                                        )[0] + 'from'
+                                                        )[0]
                                                     }}<br />{{
                                                         n.message.split(
                                                             'from'
@@ -414,16 +422,196 @@
                         class="animate__animated animate__pulse hiddenDiv"
                         [hidden]="!showDiv"
                     >
-                        Hidden Div
-                        <button
-                            (click)="logout()"
-                            type="button"
-                            class="btn btn-outline-dark me-2"
+                        <div
+                            style="
+                                width: 100%;
+                                height: 80px;
+                                border-bottom: solid 1px #60759f;
+                            "
                         >
-                            Logout
-                        </button>
+                            <img
+                                *ngIf="user.image"
+                                class="imagee2"
+                                [style.background-image]="
+                                    'url(http://localhost:3000/' +
+                                    user.image +
+                                    ')'
+                                "
+                            />
+                            <span class="username2">{{ user.username }}</span>
+                        </div>
+                        <div
+                            class="referDiv"
+                            style="
+                                width: 100%;
+                                height: 50px;
+                                border-bottom: solid 1px #60759f;
+                            "
+                        >
+                            <i class="bi bi-gift gift"></i>
+                            <span class="refer">Refer a friend</span>
+                        </div>
+                        <div
+                            class="personDiv"
+                            style="width: 100%; height: 50px"
+                        >
+                            <i class="bi bi-person person"></i>
+                            <span class="profile">Profile</span>
+                        </div>
+                        <div class="gearDiv" style="width: 100%; height: 50px">
+                            <i class="bi bi-gear gear"></i>
+
+                            <span class="settings">Settings</span>
+                        </div>
+                        <div
+                            class="globeDiv"
+                            style="
+                                width: 100%;
+                                height: 50px;
+                                border-bottom: solid 1px #60759f;
+                            "
+                        >
+                            <i class="bi bi-globe-europe-africa globe"></i>
+                            <span class="language">Language</span>
+                        </div>
+                        <div
+                            class="arrowRightiv"
+                            style="width: 100%; height: 50px"
+                        >
+                            <i class="bi bi-box-arrow-right arrowRight"></i>
+                            <span (click)="logout()" class="logOut"
+                                >Log out</span
+                            >
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tournament Code -->
+
+    <div *ngIf="tournamentCodeDiv" class="overlay">
+        <div style="height: 230px" class="challengeUser">
+            <div>
+                <i (click)="closeTournamentCode()" class="bi bi-x closeDiv"></i>
+            </div>
+            <div
+                [style.background-image]="
+                    'linear-gradient(to top, #1f2633 20% , transparent ), url(http://localhost:3000/1677863148518-valorantCover.jpeg)'
+                "
+                class="coverAndInside"
+            ></div>
+            <h5
+                style="
+                    color: whitesmoke;
+                    position: absolute;
+                    top: 140px;
+                    left: 120px;
+                "
+            >
+                Copy tournament code into your game.
+            </h5>
+            <div class="generator">
+                <span
+                    #myText
+                    style="
+                        position: absolute;
+                        color: #95acda;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        white-space: nowrap;
+                    "
+                    >{{ tournamentCode }}</span
+                >
+            </div>
+            <span (click)="copied()" class="copy">{{ copy }}</span>
+        </div>
+    </div>
+
+    <!-- Challenge -->
+
+    <div *ngIf="challengeDiv" class="overlay">
+        <div class="challengeUser">
+            <div>
+                <i (click)="closeHiddenDiv()" class="bi bi-x closeDiv"></i>
+            </div>
+            <div
+                [style.background-image]="
+                    'linear-gradient(to top, #1f2633 20% , transparent ), url(http://localhost:3000/1677863148518-valorantCover.jpeg)'
+                "
+                class="coverAndInside"
+            >
+                <div class="usernameAndImages">
+                    <h5 class="firstUser">{{ user.username }}</h5>
+                    <img
+                        class="hdImage firstImage"
+                        src="http://localhost:3000/{{ user.image }}"
+                    />
+                    <img
+                        class="hdImage secondImage"
+                        src="http://localhost:3000/{{ sender.image }}"
+                    />
+                    <span class="vs">VS</span>
+                    <h5 class="secondUser">{{ sender.username }}</h5>
+                </div>
+            </div>
+            <div class="chooseGameAndStake">
+                <div class="gameNameStatusStake">
+                    <div class="child-div">
+                        <span class="gameName"
+                            ><span class="three">Game:</span>
+                            {{ match.name_of_the_game }}</span
+                        >
+                    </div>
+                    <div class="child-div">
+                        <span *ngIf="match.match_status == 0" class="gameName">
+                            <span class="three">Status:</span>
+                            WAITING</span
+                        >
+
+                        <span *ngIf="match.match_status == 1" class="gameName">
+                            <span class="three">Status:</span>
+                            PENDING</span
+                        >
+
+                        <span *ngIf="match.match_status == 2" class="gameName">
+                            <span class="three">Status:</span>
+                            WINNER</span
+                        >
+                        <span *ngIf="match.match_status == 3" class="gameName">
+                            <span class="three">Status:</span>
+                            LOSER</span
+                        >
+                        <span *ngIf="match.match_status == 4" class="gameName">
+                            <span class="three">Status:</span>
+                            REJECTED</span
+                        >
+                    </div>
+                    <div class="child-div">
+                        <span class="gameName"
+                            ><span class="three">Stake:</span>
+                            {{ match.total_stake }} tokens</span
+                        >
+                    </div>
+                </div>
+
+                <button
+                    (click)="rejectChallenge()"
+                    *ngIf="match.match_status == 0"
+                    class="messageButton hiddenButton1Posiiton"
+                >
+                    Reject
+                </button>
+
+                <button
+                    (click)="acceptChallenge()"
+                    *ngIf="match.match_status == 0"
+                    class="addFriendButton hiddenButton2Posiiton"
+                >
+                    Accept!
+                </button>
             </div>
         </div>
     </div>
@@ -446,6 +634,7 @@
             class="bottomChatHeader"
         >
             <img
+                *ngIf="senderImageForBottomChatUser"
                 class="bottomChatImage"
                 src="http://localhost:3000/{{ senderImageForBottomChatUser }}"
             />
@@ -501,6 +690,7 @@
             style="position: absolute; top: 297px"
         >
             <img
+                *ngIf="senderImageForBottomChatUser"
                 class="bottomChatImage"
                 src="http://localhost:3000/{{ senderImageForBottomChatUser }}"
             />
@@ -572,7 +762,10 @@
                     "
                 >
                     <img
-                        *ngIf="this.user.id !== m.sender_id"
+                        *ngIf="
+                            this.user.id !== m.sender_id &&
+                            senderImageForBottomChatUser
+                        "
                         style="
                             position: absolute;
                             bottom: -12px;
@@ -622,6 +815,7 @@
             "
         >
             <input
+                (keydown.enter)="sendMessage()"
                 type="text"
                 placeholder="Aa"
                 class="form-control search-input borderColor"
